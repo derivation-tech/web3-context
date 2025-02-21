@@ -1,6 +1,6 @@
 {
 	"name": "@derivation-tech/context",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
@@ -22,7 +22,8 @@
 		"ethers": "catalog:",
 		"@eth-optimism/sdk": "catalog:",
 		"async-retry": "catalog:",
-		"axios": "catalog:"
+		"axios": "catalog:",
+		"chalk": "catalog:"
 	},
 	"devDependencies": {
 		"@types/async-retry": "catalog:",
