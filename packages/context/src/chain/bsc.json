@@ -1,0 +1,149 @@
+{
+    "chainName": "BSC",
+    "chainId": 56,
+    "chainAlias": ["bnb"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "BNB",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "BNB",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped BNB",
+        "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        "symbol": "WBNB",
+        "decimals": 18
+    },
+    "explorer": "https://bscscan.com/",
+    "tokenAssistant": "0x63a995FC3d5388F97714745F945DF30a8935f1B8",
+    "multicall3": "0xcA11bde05977b3631167028862bE2a173976CA11",
+    "erc20": [
+        {
+            "name": "Binance-Peg Ethereum Token",
+            "address": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        {
+            "name": "Binance-Peg USD Coin",
+            "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+            "symbol": "USDC.e",
+            "decimals": 18
+        },
+        {
+            "name": "  Binance-Peg BSC-USD",
+            "address": "0x55d398326f99059fF775485246999027B3197955",
+            "symbol": "USDT",
+            "decimals": 18
+        },
+        {
+            "name": " Binance-Peg Dai Token",
+            "address": "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",
+            "symbol": "DAI",
+            "decimals": 18
+        },
+        {
+            "name": "Binance-Peg BTCB Token",
+            "address": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+            "symbol": "BTCB",
+            "decimals": 18
+        },
+        {
+            "name": "XRP Token",
+            "symbol": "XRP",
+            "address": "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE",
+            "decimals": 18
+        },
+        {
+            "name": "Cardano Token",
+            "symbol": "ADA",
+            "address": "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47",
+            "decimals": 18
+        },
+        {
+            "name": "Dogecoin",
+            "symbol": "DOGE",
+            "address": "0xbA2aE424d960c26247Dd6c32edC70B295c744C43",
+            "decimals": 8
+        },
+        {
+            "name": "Matic Token",
+            "symbol": "MATIC",
+            "address": "0xCC42724C6683B7E57334c4E856f4c9965ED682bD",
+            "decimals": 18
+        },
+        {
+            "name": "BUSD Token",
+            "symbol": "BUSD",
+            "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+            "decimals": 18
+        },
+        {
+            "name": "Polkadot Token",
+            "symbol": "DOT",
+            "address": "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
+            "decimals": 18
+        },
+        {
+            "name": "Litecoin Token",
+            "symbol": "LTC",
+            "address": "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
+            "decimals": 18
+        },
+        {
+            "name": "TRON",
+            "symbol": "TRX",
+            "address": "0xCE7de646e7208a4Ef112cb6ed5038FA6cC6b12e3",
+            "decimals": 6
+        },
+        {
+            "name": "SHIBA INU",
+            "symbol": "SHIB",
+            "address": "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D",
+            "decimals": 18
+        },
+        {
+            "name": "Avalanche",
+            "symbol": "AVAX",
+            "address": "0x1CE0c2827e2eF14D5C4f29a091d735A204794041",
+            "decimals": 18
+        },
+        {
+            "name": "Uniswap",
+            "symbol": "UNI",
+            "address": "0xBf5140A22578168FD562DCcF235E5D43A02ce9B1",
+            "decimals": 18
+        },
+        {
+            "name": "Wrapped TON Coin",
+            "symbol": "TONCOIN",
+            "address": "0x76A797A59Ba2C17726896976B7B3747BfD1d220f",
+            "decimals": 9
+        },
+        {
+            "name": "ChainLink Token",
+            "symbol": "LINK",
+            "address": "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD",
+            "decimals": 18
+        },
+        {
+            "name": "Cosmos Token",
+            "symbol": "ATOM",
+            "address": "0x0Eb3a705fc54725037CC9e008bDede697f62F335",
+            "decimals": 18
+        },
+        {
+            "name": "BitTorrent",
+            "symbol": "BTT",
+            "address": "0x8595F9dA7b868b1822194fAEd312235E43007b49",
+            "decimals": 18
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

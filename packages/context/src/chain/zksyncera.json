@@ -1,0 +1,61 @@
+{
+    "chainName": "zkSyncEra",
+    "chainId": 324,
+    "chainAlias": ["zksync", "zksyncera", "zksync-era"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "ETH",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "address": "0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91",
+        "symbol": "WETH",
+        "decimals": 18
+    },
+    "explorer": "https://explorer.zksync.io/",
+    "tokenAssistant": "0x6d4b8f750db80fFa4783629c4be39fc552E9AF63",
+    "multicall3": "0xcca3e6970dF6298D6779233f6dA3c041A423a96F",
+    "erc20": [
+        {
+            "name": "USDC Token (Bridged from Ethereum)",
+            "address": "0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4",
+            "symbol": "USDC.e",
+            "decimals": 6
+        },
+        {
+            "name": "MUTE Token",
+            "address": "0x0e97C7a0F8B2C9885C8ac9fC6136e829CbC21d42",
+            "symbol": "MUTE",
+            "decimals": 18
+        },
+        {
+            "name": "SPACE Token",
+            "address": "0x47260090cE5e83454d5f05A0AbbB2C953835f777",
+            "symbol": "SPACE",
+            "decimals": 18
+        },
+        {
+            "name": "Mock USDC Coin",
+            "address": "0xB2578E4D0f94c76Cde665a884b86fb4EE16CBFB8",
+            "symbol": "USDM",
+            "decimals": 6,
+            "isStableCoin": true
+        },
+        {
+            "name": "Mock ETH",
+            "address": "0xa6E5e7DDcd6e7C5959f4AdE9aEd97594346436aF",
+            "symbol": "METH",
+            "decimals": 18,
+            "isStableCoin": false
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

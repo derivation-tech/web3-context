@@ -1,0 +1,32 @@
+{
+    "chainName": "Berachain Bartio",
+    "chainId": 80084,
+    "chainAlias": ["berabartio","berachainbartio"],
+    "defaultTxType": "legacy",
+    "isTestNet": true,
+    "nativeToken": {
+        "name": "BERA",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "BERA",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped BERA",
+        "symbol": "WBERA",
+        "address": "0x7507c1dc16935B82698e4C63f2746A2fCf994dF8",
+        "decimals": 18
+    },
+    "explorer": "https://bartio.beratrail.io/",
+    "tokenAssistant": "0x3F4C7EbE8b8CFa91F849F9137205aED2c30990cB",
+    "multicall3": "0xcA11bde05977b3631167028862bE2a173976CA11",
+    "erc20": [
+        {
+            "name": "USD Mock",
+            "address": "0x82C353484c0a557aff07A74f0cda13eb7e52DB08",
+            "symbol": "USDM",
+            "decimals": 6
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

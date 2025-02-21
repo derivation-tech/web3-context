@@ -1,0 +1,67 @@
+{
+    "chainName": "Blast",
+    "chainId": 81457,
+    "chainAlias": ["blast"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "Blast Ether",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "address": "0x4300000000000000000000000000000000000004",
+        "decimals": 18
+    },
+    "explorer": "https://blastscan.io/",
+    "tokenAssistant": "0x3F4C7EbE8b8CFa91F849F9137205aED2c30990cB",
+    "multicall3": "0xcA11bde05977b3631167028862bE2a173976CA11",
+    "erc20": [
+        {
+            "name": "USDB",
+            "address": "0x4300000000000000000000000000000000000003",
+            "symbol": "USDB",
+            "decimals": 18
+        },
+        {
+            "name": "Blast",
+            "address": "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad",
+            "symbol": "BLAST",
+            "decimals": 18
+        },
+        {
+            "name": "Mia",
+            "address": "0xa4c7aa67189ec5623121c6c94ec757dfed932d4b",
+            "symbol": "MIA",
+            "decimals": 18
+        },
+        {
+            "name": "PacMoon",
+            "address": "0x5ffd9ebd27f2fcab044c0f0a26a45cb62fa29c06",
+            "symbol": "PAC",
+            "decimals": 18
+        },
+        {
+            "name": "Few Wrapped Wrapped Ether",
+            "address": "0x66714db8f3397c767d0a602458b5b4e3c0fe7dd1",
+            "symbol": "fwWETH",
+            "decimals": 18
+        },
+        {
+            "name": "Renzo Restaked ETH",
+            "address": "0x2416092f143378750bb29b79ed961ab195cceea5",
+            "symbol": "ezETH",
+            "decimals": 18
+        },
+        {
+            "name": "Wrapped eETH",
+            "address": "0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A",
+            "symbol": "weETH",
+            "decimals": 18
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

@@ -1,0 +1,59 @@
+{
+    "chainName": "MAPO",
+    "chainId": 22776,
+    "chainAlias": ["map"],
+    "defaultTxType": "eip1559",
+    "nativeToken": {
+        "name": "MAPO",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "MAP",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped MAPO",
+        "address": "0x13cb04d4a5dfb6398fc5ab005a6c84337256ee23",
+        "symbol": "WMAPO",
+        "decimals": 18
+    },
+    "explorer": "https://maposcan.io/",
+    "tokenAssistant": "0x100D45D9c6e79EA97b317Bdb94070DFEA4AbF8EB",
+    "multicall3": "0xb2D606990a15E23201F3D400BF9B8C76D3c8bcAD",
+    "erc20": [
+        {
+            "name": "Mapped USD Coin",
+            "address": "0x9f722b2cb30093f766221fd0d37964949ed66918",
+            "symbol": "USDC.e",
+            "decimals": 18
+        },
+        {
+            "name": "Mapped Tether USD",
+            "address": "0x33daba9618a75a7aff103e53afe530fbacf4a3dd",
+            "symbol": "USDT",
+            "decimals": 18
+        },
+        {
+            "name": "Mapped Dai Stablecoin",
+            "address": "0xEdDfAac857cb94aE8A0347e2b1b06f21AA1AAeFA",
+            "symbol": "DAI",
+            "decimals": 18
+        },
+        {
+            "name": "Mapped Wrapped Ether",
+            "address": "0x05ab928d446d8ce6761e368c8e7be03c3168a9ec",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        {
+            "name": "Mapped Idavoll Network",
+            "address": "0xeac6cfd6e9e2fa033d85b7abdb6b14fe8aa71f2a",
+            "symbol": "IDV",
+            "decimals": 18
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

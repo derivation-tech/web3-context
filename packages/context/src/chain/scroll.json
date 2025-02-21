@@ -1,0 +1,101 @@
+{
+    "chainName": "Scroll",
+    "chainId": 534352,
+    "chainAlias": ["scroll"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "Ether",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "address": "0x5300000000000000000000000000000000000004",
+        "symbol": "WETH",
+        "decimals": 18
+    },
+    "explorer": "https://scrollscan.com/",
+    "tokenAssistant": "0x36bfa24f16552121963cc89a1D9cc46Ad26aDc87",
+    "multicall3": "0xcA11bde05977b3631167028862bE2a173976CA11",
+    "erc20": [
+        {
+            "name": "Tether USD",
+            "address": "0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df",
+            "symbol": "USDT",
+            "decimals": 6
+        },
+        {
+            "name": "USD Coin (Bridged from Ethereum)",
+            "address": "0x06eFdBFf2a14a7c8E15944D1F4A48F9F95F663A4",
+            "symbol": "USDC.e",
+            "decimals": 6
+        },
+        {
+            "name": "Wrapped BTC",
+            "address": "0x3C1BCa5a656e69edCD0D4E36BEbb3FcDAcA60Cf1",
+            "symbol": "WBTC",
+            "decimals": 8
+        },
+        {
+            "name": "Dai Stablecoin",
+            "address": "0xcA77eB3fEFe3725Dc33bccB54eDEFc3D9f764f97",
+            "symbol": "DAI",
+            "decimals": 18
+        },
+        {
+            "name": "Uniswap",
+            "address": "0x434cdA25E8a2CA5D9c1C449a8Cb6bCbF719233E8",
+            "symbol": "UNI",
+            "decimals": 18
+        },
+        {
+            "name": "Aave Token",
+            "symbol": "AAVE",
+            "address": "0x79379C0E09a41d7978f883a56246290eE9a8c4d3",
+            "decimals": 18
+        },
+        {
+            "name": "Curve DAO Token",
+            "symbol": "CRV",
+            "address": "0xB755039eDc7910C1F1BD985D48322E55A31AC0bF",
+            "decimals": 18
+        },
+        {
+            "name": "PancakeSwap Token",
+            "symbol": "CAKE",
+            "address": "0x1b896893dfc86bb67Cf57767298b9073D2c1bA2c",
+            "decimals": 18
+        },
+        {
+            "name": "LUSD Stablecoin",
+            "symbol": "LUSD",
+            "address": "0xeDEAbc3A1e7D21fE835FFA6f83a710c70BB1a051",
+            "decimals": 18
+        },
+        {
+            "name": "Balancer",
+            "symbol": "BAL",
+            "address": "0x6a28e90582c583fcd3347931c544819C31e9D0e0",
+            "decimals": 18
+        },
+        {
+            "name": "USD Mock Token",
+            "address": "0x82C353484c0a557aff07A74f0cda13eb7e52DB08",
+            "symbol": "USDM",
+            "decimals": 6
+        },
+        {
+            "name": "Mock ETH Token",
+            "address": "0x772C92e5e11626470c7820B1Fa600219653Ad7Cd",
+            "symbol": "METH",
+            "decimals": 18
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

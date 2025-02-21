@@ -1,0 +1,59 @@
+{
+    "chainName": "Klaytn",
+    "chainId": 8217,
+    "chainAlias": ["klay"],
+    "defaultTxType": "eip1559",
+    "nativeToken": {
+        "name": "Klaytn",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "KLAY",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Klay",
+        "address": "0x19aac5f612f524b754ca7e7c41cbfa2e981a4432",
+        "symbol": "WKLAY",
+        "decimals": 18
+    },
+    "explorer": "https://klaytnscope.com/",
+    "tokenAssistant": "0x2c4E130925Fe444d15B647A8D20cA40b8CF08496",
+    "multicall3": "0xca11bde05977b3631167028862be2a173976ca11",
+    "erc20": [
+        {
+            "name": "Orbit Bridge Klaytn Ethereum",
+            "address": "0x34d21b1e550d73cee41151c77f3c73359527a396",
+            "symbol": "oETH",
+            "decimals": 18
+        },
+        {
+            "name": "Orbit Bridge Klaytn USD Tether",
+            "address": "0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167",
+            "symbol": "oUSDT",
+            "decimals": 6
+        },
+        {
+            "name": "Orbit Bridge Klaytn Binance Coin",
+            "address": "0x574e9c26bda8b95d7329505b4657103710eb32ea",
+            "symbol": "oBNB",
+            "decimals": 18
+        },
+        {
+            "name": "Orbit Bridge Klaytn USD Coin",
+            "address": "0x754288077d0ff82af7a5317c7cb8c444d421d103",
+            "symbol": "oUSDC",
+            "decimals": 6
+        },
+        {
+            "name": "Orbit Bridge Klaytn Matic Token",
+            "address": "0xa006ba407cfc6584c90bac24ed971261885a0fd6",
+            "symbol": "oMATIC",
+            "decimals": 18
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

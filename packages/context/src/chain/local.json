@@ -1,0 +1,65 @@
+{
+    "chainName": "Local",
+    "chainId": 31337,
+    "chainAlias": [ "localhost" ],
+    "defaultTxType": "eip1559",
+    "nativeToken": {
+        "name": "Local Ether",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "address": "0xd723C18b9EbeC382A4cDb22939517ca21729Fb8e",
+        "decimals": 18
+    },
+    "explorer": "https://goerli.etherscan.io",
+    "tokenAssistant": "0x70bD543Abbd32011f483E7bAbcc79fB8D62EA2a8",
+    "multicall3": "0x11C475964634d6b44aa43bCADF63aDA6Cf04c0F2",
+    "erc20": [
+        {
+            "name": "USDC Coin",
+            "address": "0x911EB93171EDCBBC0ED8CCc838735b67ec1b2580",
+            "symbol": "USDC",
+            "decimals": 6
+        },
+        {
+            "name": "Tether USD",
+            "address": "0x208B314810a368F978B612b87E6271Ea5ff1cD95",
+            "symbol": "USDT",
+            "decimals": 18
+        },
+        {
+            "name": "Dai Stable Coin",
+            "address": "0x9fdE50e50ffFb0EE02d5398Aa0B0E9d25d64CcAA",
+            "symbol": "DAI",
+            "decimals": 18
+        },
+        {
+            "name": "Wrapped BTC",
+            "address": "0x15b948eE63563f6AF626a061517e1e531A9D78d0",
+            "symbol": "WBTC",
+            "decimals": 8
+        },
+        {
+            "name": "Matic Token",
+            "address": "0x8D44a26983030e390a3cCf135B270B313AEbb181",
+            "symbol": "MATIC",
+            "decimals": 18
+        },
+        {
+            "name": "BNB Token",
+            "address": "0x0a4674bfdD977d7440A371c5E3333d0E99FF69f2",
+            "symbol": "BNB",
+            "decimals": 18
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

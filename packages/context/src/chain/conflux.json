@@ -1,0 +1,71 @@
+{
+    "chainName": "Conflux",
+    "chainId": 1030,
+    "chainAlias": ["cfx"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "Conflux",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "CFX",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Conflux",
+        "address": "0x14b2d3bc65e74dae1030eafd8ac30c533c976a9b",
+        "symbol": "WCFX",
+        "decimals": 18
+    },
+    "explorer": "https://evm.confluxscan.net/",
+    "tokenAssistant": "0x2f1d299fa53d51105012bf154aad73ff1906de6b",
+    "multicall3": "0xa88FD02665151024ec88650072B8B471b39496B7",
+    "erc20": [
+        {
+            "name": "X nucleon CFX",
+            "address": "0x889138644274a7dc602f25a7e7d53ff40e6d0091",
+            "symbol": "XCFX",
+            "decimals": 18
+        },
+        {
+            "name": "Nucleon Governance Token",
+            "address": "0xfe197e7968807b311d476915db585831b43a7e3b",
+            "symbol": "NUT",
+            "decimals": 18
+        },
+        {
+            "name": "Tether USD",
+            "address": "0xfe97e85d13abd9c1c33384e796f10b73905637ce",
+            "symbol": "USDT",
+            "decimals": 18
+        },
+        {
+            "name": "Ethereum Token",
+            "address": "0xa47f43de2f9623acb395ca4905746496d2014d57",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        {
+            "name": "USD Coin",
+            "address": "0x6963efed0ab40f6c3d7bda44a05dcf1437c44372",
+            "symbol": "USDC.e",
+            "decimals": 18
+        },
+        {
+            "name": "Wrapped BTC",
+            "address": "0x1f545487c62e5acfea45dcadd9c627361d1616d8",
+            "symbol": "WBTC",
+            "decimals": 18
+        },
+        {
+            "name": "BNB Token",
+            "address": "0x94bd7a37d2ce24cc597e158facaa8d601083ffec",
+            "symbol": "BNB",
+            "decimals": 18
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

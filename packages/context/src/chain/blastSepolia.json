@@ -1,0 +1,50 @@
+{
+    "chainName": "BlastSepolia",
+    "chainId": 168587773,
+    "chainAlias": ["blastsepolia","blastSepolia"],
+    "defaultTxType": "legacy",
+    "isTestNet": true,
+    "nativeToken": {
+        "name": "Blast Test Ether",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "address": "0x4200000000000000000000000000000000000023",
+        "decimals": 18
+    },
+    "explorer": "https://testnet.blastscan.io/",
+    "tokenAssistant": "0x93ecB984e2802A0479bAfeb57A70a7C8092A90F1",
+    "multicall3": "0x8d585aFB7711Cc49D9882133780D3B41e3361D72",
+    "erc20": [
+        {
+            "name": "USD Mock",
+            "address": "0x82C353484c0a557aff07A74f0cda13eb7e52DB08",
+            "symbol": "USDM",
+            "decimals": 6
+        },
+        {
+            "name": "Rebasing USD",
+            "address": "0x4200000000000000000000000000000000000022",
+            "symbol": "USDB",
+            "decimals": 18
+        },
+        {
+            "name": "Wrapped BTC",
+            "address": "0x684063aB93Aa493F8a1389cD2Fbc5E9fBd324A91",
+            "symbol": "WBTC",
+            "decimals": 8
+        },
+        {
+            "name": "F(BTC,20)",
+            "address": "0x982Ebde77c10B7155A73d59c0437aC556F7F7b01",
+            "symbol": "F(BTC,20)",
+            "decimals": 6
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

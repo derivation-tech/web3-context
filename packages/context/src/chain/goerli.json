@@ -1,0 +1,48 @@
+{
+    "chainName": "Goerli",
+    "chainId": 5,
+    "chainAlias": ["geth", "goerli"],
+    "defaultTxType": "eip1559",
+    "isTestNet": true,
+    "nativeToken": {
+        "name": "Goerli Ether",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "address": "0x7539a3af6c019b6816eb367cc38eec7d943aa545",
+        "decimals": 18
+    },
+    "explorer": "https://goerli.etherscan.io",
+    "tokenAssistant": "0x63a995FC3d5388F97714745F945DF30a8935f1B8",
+    "multicall3": "0xcA11bde05977b3631167028862bE2a173976CA11",
+    "erc20": [
+        {
+            "name": "Matic Token",
+            "address": "0xbf3b5CF32066650Ea0b28277e621Ee3d0b41905A",
+            "symbol": "MATIC",
+            "decimals": 18
+        },
+        {
+            "name": "Dai Stablecoin",
+            "address": "0x11fE4B6AE13d2a6055C8D9cF65c55bac32B5d844",
+            "symbol": "DAI",
+            "decimals": 18
+        },
+        {
+            "name": "USD Mock Token",
+            "address": "0x82C353484c0a557aff07A74f0cda13eb7e52DB08",
+            "symbol": "USDM",
+            "decimals": 6
+        }
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "chainName": "Local",
+    "chainId": 31337,
+    "chainAlias": [ "localhost" ],
+    "defaultTxType": "eip1559",
+    "nativeToken": {
+        "name": "Local Ether",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "address": "0x",
+        "decimals": 18
+    },
+    "explorer": "",
+    "tokenAssistant": "0x",
+    "multicall3": "0x",
+    "erc20": [
+
+    ],
+    "erc721": [
+
+    ],
+    "erc1155": [
+
+    ]
+}
