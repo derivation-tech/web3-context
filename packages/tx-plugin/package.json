@@ -1,6 +1,6 @@
 {
 	"name": "@derivation-tech/tx-plugin",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
@@ -21,7 +21,8 @@
 		"@derivation-tech/contracts": "workspace:^",
 		"ethers": "catalog:",
 		"async-retry": "catalog:",
-		"gas-price-oracle": "catalog:"
+		"gas-price-oracle": "catalog:",
+		"chalk": "catalog:"
 	},
 	"devDependencies": {
 		"@types/async-retry": "catalog:"

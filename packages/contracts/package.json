@@ -1,6 +1,6 @@
 {
   "name": "@derivation-tech/contracts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -18,7 +18,8 @@
     "build:check": "node -e \"require('./dist-node')\""
   },
   "dependencies": {
-    "ethers": "catalog:"
+    "ethers": "catalog:",
+    "chalk": "catalog:"
   },
   "devDependencies": {
     "@typechain/ethers-v5": "catalog:",
