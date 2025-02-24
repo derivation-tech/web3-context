@@ -388,7 +388,7 @@ export class TxModule implements TxInterface {
 				RIGHT_ARROW,
 				chalk.magenta(this.chainName.toUpperCase()),
 				'txHash:',
-				response.hash + ',',
+				this.core.getExplorerTxLink(response.hash) + ',',
 				overrides,
 			);
 		} catch (err) {

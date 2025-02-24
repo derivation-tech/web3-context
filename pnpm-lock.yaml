@@ -24,6 +24,9 @@ catalogs:
     axios:
       specifier: ^1.7.9
       version: 1.7.9
+    chalk:
+      specifier: 4.1.2
+      version: 4.1.2
     ethers:
       specifier: ^5.7.2
       version: 5.7.2
@@ -131,6 +134,9 @@ importers:
       axios:
         specifier: 'catalog:'
         version: 1.7.9
+      chalk:
+        specifier: 'catalog:'
+        version: 4.1.2
       ethers:
         specifier: 'catalog:'
         version: 5.7.2
@@ -147,6 +153,9 @@ importers:
 
   packages/contracts:
     dependencies:
+      chalk:
+        specifier: 'catalog:'
+        version: 4.1.2
       ethers:
         specifier: 'catalog:'
         version: 5.7.2
@@ -194,6 +203,9 @@ importers:
       async-retry:
         specifier: 'catalog:'
         version: 1.3.3
+      chalk:
+        specifier: 'catalog:'
+        version: 4.1.2
       ethers:
         specifier: 'catalog:'
         version: 5.7.2
@@ -1281,28 +1293,24 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@nx/nx-linux-arm64-musl@20.0.6':
     resolution: {integrity: sha512-4lyBaLWSv7VNMOXWxtuDNiSOE4M5QGiVHimSvQ9PBwgnrvEuc6fCv/Nc8ecU0rINHRQJruYMTD/kKBCsahwJUQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@nx/nx-linux-x64-gnu@20.0.6':
     resolution: {integrity: sha512-HGZzX7un/rJvADKwN27HM0e3Gx19hSndCoqZUtqHgrFRdUvTfHTWNpT6uZ5XW/5bNnRKdUinY9DHhlYpE0u4KQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@nx/nx-linux-x64-musl@20.0.6':
     resolution: {integrity: sha512-OwMq+ozzCOCtAViOouHbe/MXqep/q4EKg44YelUqVNIe/2XimcIfMlBQFk1DOcmibesxa3yWMKAdg2IGUnG+pQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@nx/nx-win32-arm64-msvc@20.0.6':
     resolution: {integrity: sha512-2D8TIjyi5dJLy4cx8u7YKunW6+EG9FAuBUo75qMCozTBw1EPTK2lzwLE2d8C7WOxBA148O2wzD5uiX1vCt2Tzg==}
