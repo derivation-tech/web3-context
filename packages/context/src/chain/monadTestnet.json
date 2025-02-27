@@ -1,0 +1,43 @@
+{
+	"chainName": "monadTestnet",
+	"chainId": 10143,
+	"chainAlias": ["monad-testnet", "Monad Testnet"],
+	"defaultTxType": "eip1559",
+	"nativeToken": {
+		"name": "MON",
+		"address": "0x0000000000000000000000000000000000000000",
+		"symbol": "MON",
+		"decimals": 18
+	},
+	"wrappedNativeToken": {
+		"name": "Wrapped Monad",
+		"address": "0x760AfE86e5de5fa0Ee542fc7B7B713e1c5425701",
+		"symbol": "WMON",
+		"decimals": 18
+	},
+	"explorer": "https://testnet.monadexplorer.com/",
+	"tokenAssistant": "0x3D72a79A481990E2a8c5089bBC8dA600081330A8",
+	"multicall3": "0x4425013195c6e1C13cAE2Df50bd84526F3E227AB",
+	"erc20": [
+		{
+			"name": "Molandak",
+			"address": "0x0F0BDEbF0F83cD1EE3974779Bcb7315f9808c714",
+			"symbol": "DAK",
+			"decimals": 18
+		},
+		{
+			"name": "Moyaki",
+			"address": "0xfe140e1dCe99Be9F4F15d657CD9b7BF622270C50",
+			"symbol": "YAKI",
+			"decimals": 18
+		},
+		{
+			"name": "Chog",
+			"address": "0xe0590015a873bf326bd645c3e1266d4db41c4e6b",
+			"symbol": "CHOG",
+			"decimals": 18
+		}
+	],
+	"erc721": [],
+	"erc1155": []
+}
