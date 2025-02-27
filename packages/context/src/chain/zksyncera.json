@@ -52,10 +52,6 @@
             "isStableCoin": false
         }
     ],
-    "erc721": [
-
-    ],
-    "erc1155": [
-
-    ]
+    "erc721": [],
+    "erc1155": []
 }

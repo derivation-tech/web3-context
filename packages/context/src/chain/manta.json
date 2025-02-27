@@ -1,9 +1,7 @@
 {
     "chainName": "Manta",
     "chainId": 169,
-    "chainAlias": [
-        "manta"
-    ],
+    "chainAlias": ["manta"],
     "defaultTxType": "legacy",
     "nativeToken": {
         "name": "Ether",

@@ -1,7 +1,7 @@
 {
     "chainName": "Berachain Bartio",
     "chainId": 80084,
-    "chainAlias": ["berabartio","berachainbartio"],
+    "chainAlias": ["berabartio", "berachainbartio"],
     "defaultTxType": "legacy",
     "isTestNet": true,
     "nativeToken": {

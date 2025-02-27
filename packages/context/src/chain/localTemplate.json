@@ -1,7 +1,7 @@
 {
     "chainName": "Local",
     "chainId": 31337,
-    "chainAlias": [ "localhost" ],
+    "chainAlias": ["localhost"],
     "defaultTxType": "eip1559",
     "nativeToken": {
         "name": "Local Ether",
@@ -18,13 +18,7 @@
     "explorer": "",
     "tokenAssistant": "0x",
     "multicall3": "0x",
-    "erc20": [
-
-    ],
-    "erc721": [
-
-    ],
-    "erc1155": [
-
-    ]
+    "erc20": [],
+    "erc721": [],
+    "erc1155": []
 }

@@ -6,7 +6,7 @@
 
 - context: add monad testnet
 - Updated dependencies
-  - @derivation-tech/contracts@0.1.2
+    - @derivation-tech/contracts@0.1.2
 
 ## 0.1.1
 
@@ -14,4 +14,4 @@
 
 - context: add explorer link
 - Updated dependencies
-  - @derivation-tech/contracts@0.1.1
+    - @derivation-tech/contracts@0.1.1
