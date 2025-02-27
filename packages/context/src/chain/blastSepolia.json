@@ -1,7 +1,7 @@
 {
     "chainName": "BlastSepolia",
     "chainId": 168587773,
-    "chainAlias": ["blastsepolia","blastSepolia"],
+    "chainAlias": ["blastsepolia", "blastSepolia"],
     "defaultTxType": "legacy",
     "isTestNet": true,
     "nativeToken": {

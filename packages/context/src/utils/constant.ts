@@ -1,32 +1,32 @@
 import { BigNumber } from 'ethers';
 
 export enum CHAIN_ID {
-	LOCAL = 31337,
-	ETHEREUM = 1,
-	ROPSTEN = 3,
-	RINKEBY = 4,
-	GOERLI = 5,
-	KOVAN = 42,
-	BSC = 56,
-	POLYGON = 137,
-	POLYGONZKEVM = 1101,
-	ARBITRUM = 42161,
-	MUMBAI = 80001,
-	ZKSYNC = 324,
-	LINEA = 59144,
-	OPTIMISM = 10,
-	SCROLL = 534352,
-	MANTLE = 5000,
-	BASE = 8453,
-	CONFLUX = 1030,
-	MAPO = 22776,
-	SEPOLIA = 11155111,
-	KLAYTN = 8217,
-	BERABARTIO = 80084,
-	BLASTSEPOLIA = 168587773,
-	BLAST = 81457,
-	MANTA = 169,
-	MONADTESTNET = 10143,
+    LOCAL = 31337,
+    ETHEREUM = 1,
+    ROPSTEN = 3,
+    RINKEBY = 4,
+    GOERLI = 5,
+    KOVAN = 42,
+    BSC = 56,
+    POLYGON = 137,
+    POLYGONZKEVM = 1101,
+    ARBITRUM = 42161,
+    MUMBAI = 80001,
+    ZKSYNC = 324,
+    LINEA = 59144,
+    OPTIMISM = 10,
+    SCROLL = 534352,
+    MANTLE = 5000,
+    BASE = 8453,
+    CONFLUX = 1030,
+    MAPO = 22776,
+    SEPOLIA = 11155111,
+    KLAYTN = 8217,
+    BERABARTIO = 80084,
+    BLASTSEPOLIA = 168587773,
+    BLAST = 81457,
+    MANTA = 169,
+    MONADTESTNET = 10143,
 }
 
 export const PREFIX = '├─';
@@ -57,9 +57,7 @@ export const ZERO = BigNumber.from(0);
 export const ONE = BigNumber.from(1);
 export const TWO = BigNumber.from(2);
 
-export const MAX_UINT256 = BigNumber.from(
-	'0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-);
+export const MAX_UINT256 = BigNumber.from('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
 
 export const ONE_HUNDRED = BigNumber.from(100);
 export const ONE_THOUSAND = BigNumber.from(1000);

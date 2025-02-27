@@ -1,51 +1,51 @@
 {
-  "name": "@derivation-tech/contracts",
-  "version": "0.1.2",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "genTypes": "npx typechain --always-generate-overloads --discriminate-types --target ethers-v5 --out-dir ./src/typechain ./src/abis/*.json",
-    "clean": "rm -rf dist",
-    "format": "prettier --write '**/*'",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:coverage": "jest --coverage=true --coverage-reporters=text",
-    "test:ci": "jest --coverage=true --coverage-reporters=json --verbose",
-    "test:watch": "npm test -- --watch",
-    "prebuild": "rm -r dist/* || mkdir dist || true",
-    "build": "tsc --build tsconfig.json",
-    "build:check": "node -e \"require('./dist-node')\""
-  },
-  "dependencies": {
-    "ethers": "catalog:",
-    "chalk": "catalog:"
-  },
-  "devDependencies": {
-    "@typechain/ethers-v5": "catalog:",
-    "typechain": "catalog:"
-  },
-  "jest": {
-    "verbose": true,
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "./",
-    "testEnvironment": "node",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.ts$": [
-        "ts-jest",
-        {
-          "tsconfig": "tsconfig.test.json"
-        }
-      ]
+    "name": "@derivation-tech/contracts",
+    "version": "0.1.2",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "genTypes": "npx typechain --always-generate-overloads --discriminate-types --target ethers-v5 --out-dir ./src/typechain ./src/abis/*.json",
+        "clean": "rm -rf dist",
+        "format": "prettier --write '**/*'",
+        "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+        "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "test": "jest",
+        "test:coverage": "jest --coverage=true --coverage-reporters=text",
+        "test:ci": "jest --coverage=true --coverage-reporters=json --verbose",
+        "test:watch": "npm test -- --watch",
+        "prebuild": "rm -r dist/* || mkdir dist || true",
+        "build": "tsc --build tsconfig.json",
+        "build:check": "node -e \"require('./dist-node')\""
     },
-    "testTimeout": 30000
-  }
+    "dependencies": {
+        "ethers": "catalog:",
+        "chalk": "catalog:"
+    },
+    "devDependencies": {
+        "@typechain/ethers-v5": "catalog:",
+        "typechain": "catalog:"
+    },
+    "jest": {
+        "verbose": true,
+        "collectCoverageFrom": [
+            "**/*.(t|j)s"
+        ],
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "./",
+        "testEnvironment": "node",
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": {
+            "^.+\\.ts$": [
+                "ts-jest",
+                {
+                    "tsconfig": "tsconfig.test.json"
+                }
+            ]
+        },
+        "testTimeout": 30000
+    }
 }

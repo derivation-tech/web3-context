@@ -4,15 +4,15 @@ import { CallOption } from './types';
 import { TxInterface } from './tx.interface';
 
 declare module '@derivation-tech/context' {
-	interface Context {
-		tx: TxInterface;
-	}
+    interface Context {
+        tx: TxInterface;
+    }
 }
 
 export const txPlugin = (option?: CallOption): Plugin => {
-	return {
-		install(context: Context): void {
-			context.tx = new TxModule(context, option);
-		},
-	};
+    return {
+        install(context: Context): void {
+            context.tx = new TxModule(context, option);
+        },
+    };
 };

@@ -24,41 +24,41 @@ import MonadTestnet from './monadTestnet.json';
 import { ContextCoreError } from '../error';
 
 export function getChainInfo(nameOrId: string | number): ChainInfo {
-	const allInfos = [
-		LocalChainInfo,
-		PolygonInfo,
-		PolygonZKEVMInfo,
-		EthereumInfo,
-		GoerliInfo,
-		BscInfo,
-		ArbitrumInfo,
-		ZkSyncInfo,
-		LineaInfo,
-		OptimismInfo,
-		ScrollInfo,
-		MantleInfo,
-		BaseInfo,
-		ConfluxInfo,
-		MapoInfo,
-		SepoliaInfo,
-		KlaytnInfo,
-		BlastSepolia,
-		Blast,
-		Manta,
-		BeraBartio,
-		MonadTestnet,
-	];
-	for (const info of allInfos) {
-		if (typeof nameOrId === 'number' && info.chainId === nameOrId) {
-			return info as unknown as ChainInfo;
-		}
-		if (
-			typeof nameOrId === 'string' &&
-			(info.chainAlias.map(alias => alias.toLowerCase()).includes(nameOrId.toLowerCase()) ||
-				info.chainName.toLowerCase() === nameOrId.toLowerCase())
-		) {
-			return info as unknown as ChainInfo;
-		}
-	}
-	throw new ContextCoreError(`unsupported network ${nameOrId}`);
+    const allInfos = [
+        LocalChainInfo,
+        PolygonInfo,
+        PolygonZKEVMInfo,
+        EthereumInfo,
+        GoerliInfo,
+        BscInfo,
+        ArbitrumInfo,
+        ZkSyncInfo,
+        LineaInfo,
+        OptimismInfo,
+        ScrollInfo,
+        MantleInfo,
+        BaseInfo,
+        ConfluxInfo,
+        MapoInfo,
+        SepoliaInfo,
+        KlaytnInfo,
+        BlastSepolia,
+        Blast,
+        Manta,
+        BeraBartio,
+        MonadTestnet,
+    ];
+    for (const info of allInfos) {
+        if (typeof nameOrId === 'number' && info.chainId === nameOrId) {
+            return info as unknown as ChainInfo;
+        }
+        if (
+            typeof nameOrId === 'string' &&
+            (info.chainAlias.map((alias) => alias.toLowerCase()).includes(nameOrId.toLowerCase()) ||
+                info.chainName.toLowerCase() === nameOrId.toLowerCase())
+        ) {
+            return info as unknown as ChainInfo;
+        }
+    }
+    throw new ContextCoreError(`unsupported network ${nameOrId}`);
 }

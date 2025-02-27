@@ -1,4 +1,4 @@
 export enum SignerType {
-	ENV = 'env',
-	LEDGER = 'ledger',
+    ENV = 'env',
+    LEDGER = 'ledger',
 }
