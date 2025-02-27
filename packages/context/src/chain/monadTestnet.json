@@ -36,6 +36,12 @@
 			"address": "0xe0590015a873bf326bd645c3e1266d4db41c4e6b",
 			"symbol": "CHOG",
 			"decimals": 18
+		},
+		{
+			"name": "USD Coin",
+			"address": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+			"symbol": "USDC",
+			"decimals": 6
 		}
 	],
 	"erc721": [],
