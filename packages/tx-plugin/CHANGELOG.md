@@ -1,5 +1,14 @@
 # @derivation-tech/tx-plugin
 
+## 0.1.2
+
+### Patch Changes
+
+- context: add monad testnet
+- Updated dependencies
+  - @derivation-tech/context@0.1.2
+  - @derivation-tech/contracts@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
