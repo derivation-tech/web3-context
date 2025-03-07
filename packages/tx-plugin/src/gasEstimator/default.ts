@@ -37,6 +37,10 @@ export class DefaultEthGasEstimator implements EthGasEstimator {
                 .mul(Math.floor(scaler * 100))
                 .div(100);
 
+            if (priorityFeePerGas.isZero()) {
+                priorityFeePerGas = BigNumber.from(1);
+            }
+
             return {
                 maxFeePerGas: maxBaseFeePerGas.mul(2).add(priorityFeePerGas),
                 maxPriorityFeePerGas: priorityFeePerGas,
