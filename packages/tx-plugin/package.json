@@ -21,7 +21,6 @@
         "@derivation-tech/contracts": "workspace:^",
         "ethers": "catalog:",
         "async-retry": "catalog:",
-        "gas-price-oracle": "catalog:",
         "chalk": "catalog:"
     },
     "devDependencies": {

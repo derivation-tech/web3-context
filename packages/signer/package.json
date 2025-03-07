@@ -21,8 +21,7 @@
         "@derivation-tech/contracts": "workspace:^",
         "@derivation-tech/ethers-ledger": "^1.0.0",
         "ethers": "catalog:",
-        "async-retry": "catalog:",
-        "gas-price-oracle": "catalog:"
+        "async-retry": "catalog:"
     },
     "devDependencies": {
         "@types/async-retry": "catalog:"
