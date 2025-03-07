@@ -1,5 +1,11 @@
 # @derivation-tech/contracts
 
+## 1.0.0
+
+### Major Changes
+
+- tx-plugin: improve plugin, user should manually pass in the `gasEstimator` instance
+
 ## 0.1.2
 
 ### Patch Changes
