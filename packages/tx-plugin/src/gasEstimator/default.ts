@@ -20,8 +20,8 @@ export class DefaultEthGasEstimator implements EthGasEstimator {
         } else {
             const result: {
                 baseFeePerGas: string[];
-                reward: [string, string][];
-            } = await (provider as JsonRpcProvider).send('eth_feeHistory', [100, 'latest', [50, 75]]);
+                reward: [string][];
+            } = await (provider as JsonRpcProvider).send('eth_feeHistory', [100, 'latest', [3]]);
 
             let maxBaseFeePerGas = BigNumber.from(0);
             let priorityFeePerGas = BigNumber.from(0);
