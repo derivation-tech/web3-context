@@ -1,38 +1,50 @@
-import { GasPriceOracle } from 'gas-price-oracle/lib/services';
-import asyncRetry from 'async-retry';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { TxType } from '../types';
 import { EthGasEstimator } from './estimator';
 import { Provider } from '@ethersproject/abstract-provider';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import { CHAIN_ID } from '@derivation-tech/context';
 
+const defaultBlocks = 100;
+
 export class DefaultEthGasEstimator implements EthGasEstimator {
-    // we use gas-price-oracle as the default on-chain gas price estimator as ethers.js v5.7 does not support EIP1559 well (or not accuracte)
     public async getGasPrice(
         chainId: CHAIN_ID,
         provider: Provider,
         txType: TxType,
         scaler = 1,
     ): Promise<ethers.Overrides> {
-        const gasPriceOracle = new GasPriceOracle({
-            defaultRpc: (provider as JsonRpcProvider).connection.url,
-            chainId,
-        });
-        // estimate gas price from gas-price-oracle with tx type
-        const data = await asyncRetry(async () => {
-            return gasPriceOracle.gasPrices({ isLegacy: txType === TxType.LEGACY });
-        });
-        // it is a EIP1559 tx
-        if (data['maxFeePerGas'] && data['maxPriorityFeePerGas']) {
-            const maxFeePerGas = data['maxFeePerGas'] * scaler;
-            const maxPriorityFeePerGas = maxFeePerGas - data['baseFee'];
-            return {
-                maxPriorityFeePerGas: Math.ceil(maxPriorityFeePerGas * 10 ** 9),
-                maxFeePerGas: Math.ceil(maxFeePerGas * 10 ** 9),
-            };
+        if (txType === TxType.LEGACY) {
+            const gasPrice = await provider.getGasPrice();
+            return { gasPrice };
         } else {
-            return { gasPrice: Math.ceil(data['fast'] * scaler * 10 ** 9) };
+            const result: {
+                baseFeePerGas: string[];
+                reward: [string][];
+            } = await (provider as JsonRpcProvider).send('eth_feeHistory', [100, 'latest', [3]]);
+
+            let maxBaseFeePerGas = BigNumber.from(0);
+            let priorityFeePerGas = BigNumber.from(0);
+
+            for (let i = 0; i < defaultBlocks; i++) {
+                const baseFeePerGas = BigNumber.from(result.baseFeePerGas[i]);
+                maxBaseFeePerGas = maxBaseFeePerGas.gt(baseFeePerGas) ? maxBaseFeePerGas : baseFeePerGas;
+                priorityFeePerGas = priorityFeePerGas.add(BigNumber.from(result.reward[i][0]));
+            }
+
+            priorityFeePerGas = priorityFeePerGas
+                .div(defaultBlocks)
+                .mul(Math.floor(scaler * 100))
+                .div(100);
+
+            if (priorityFeePerGas.isZero()) {
+                priorityFeePerGas = BigNumber.from(1);
+            }
+
+            return {
+                maxFeePerGas: maxBaseFeePerGas.mul(2).add(priorityFeePerGas),
+                maxPriorityFeePerGas: priorityFeePerGas,
+            };
         }
     }
 }

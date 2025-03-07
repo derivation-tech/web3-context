@@ -9,7 +9,7 @@ declare module '@derivation-tech/context' {
     }
 }
 
-export const txPlugin = (option?: CallOption): Plugin => {
+export const txPlugin = (option: CallOption): Plugin => {
     return {
         install(context: Context): void {
             context.tx = new TxModule(context, option);

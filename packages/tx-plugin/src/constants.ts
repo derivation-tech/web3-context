@@ -1,7 +1,7 @@
 import { LogLevel } from '@derivation-tech/context';
 import { CallOption } from './types';
 
-export const DEFAULT_CALL_OPTION: CallOption = {
+export const DEFAULT_CALL_OPTION: Partial<CallOption> = {
     waitReceipt: true,
     waitTimeout: 3 * 60,
     estimateGas: true,
