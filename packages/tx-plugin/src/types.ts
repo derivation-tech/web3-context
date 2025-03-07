@@ -45,7 +45,7 @@ export interface CallOption extends GasOptions {
     // estimate gas or not
     estimateGas?: boolean;
     // gas estimator is used for estimating gas price
-    gasEstimator?: EthGasEstimator;
+    gasEstimator: EthGasEstimator;
     loggerOps?: {
         level?: LogLevel;
         logger?: BaseLogger;

@@ -9,7 +9,6 @@ import { formatEther, getContractAddress } from 'ethers/lib/utils';
 import { getRevertReason, parseServerError } from './revert';
 import chalk from 'chalk';
 import { DEFAULT_CALL_OPTION } from './constants';
-import { EthGasEstimatorFactory } from './gasEstimator/factory';
 import { TxInterface } from './tx.interface';
 
 export class TxModule implements TxInterface {
@@ -19,11 +18,7 @@ export class TxModule implements TxInterface {
     constructor(core: Context, option = DEFAULT_CALL_OPTION) {
         this.core = core;
         this.option = {
-            ...{
-                ...DEFAULT_CALL_OPTION,
-                // initialize default gas estimator
-                ...{ gasEstimator: EthGasEstimatorFactory.getGasEstimator(this.chainId) },
-            },
+            ...DEFAULT_CALL_OPTION,
             ...option,
         } as Required<CallOption>;
     }
