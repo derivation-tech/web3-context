@@ -15,13 +15,15 @@ export class DefaultEthGasEstimator implements EthGasEstimator {
         scaler = 1,
     ): Promise<ethers.Overrides> {
         if (txType === TxType.LEGACY) {
+            // legacy transaction, use the current gas price
             const gasPrice = await provider.getGasPrice();
             return { gasPrice };
         } else {
+            // query the historical information of the last 3% of fees in the last 100 blocks
             const result: {
                 baseFeePerGas: string[];
                 reward: [string][];
-            } = await (provider as JsonRpcProvider).send('eth_feeHistory', [100, 'latest', [3]]);
+            } = await (provider as JsonRpcProvider).send('eth_feeHistory', [defaultBlocks, 'latest', [3]]);
 
             let maxBaseFeePerGas = BigNumber.from(0);
             let priorityFeePerGas = BigNumber.from(0);
@@ -32,16 +34,19 @@ export class DefaultEthGasEstimator implements EthGasEstimator {
                 priorityFeePerGas = priorityFeePerGas.add(BigNumber.from(result.reward[i][0]));
             }
 
+            // calculate the average priorityFeePerGas and multiply by the scaler
             priorityFeePerGas = priorityFeePerGas
                 .div(defaultBlocks)
                 .mul(Math.floor(scaler * 100))
                 .div(100);
 
+            // zero check
             if (priorityFeePerGas.isZero()) {
                 priorityFeePerGas = BigNumber.from(1);
             }
 
             return {
+                // double baseFeePerGas to prevent baseFee from rising
                 maxFeePerGas: maxBaseFeePerGas.mul(2).add(priorityFeePerGas),
                 maxPriorityFeePerGas: priorityFeePerGas,
             };
