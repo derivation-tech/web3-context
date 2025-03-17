@@ -1,5 +1,14 @@
 # @derivation-tech/tx-plugin
 
+## 1.0.1
+
+### Patch Changes
+
+- Fix txOptions.type, publish to private packages
+- Updated dependencies
+    - @derivation-tech/context@1.0.1
+    - @derivation-tech/contracts@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

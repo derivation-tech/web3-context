@@ -75,7 +75,7 @@ export class TxModule implements TxInterface {
             ptx.nonce = ethers.BigNumber.from(await txOptions.nonce).toNumber();
         }
 
-        if (txOptions?.type) {
+        if (txOptions?.type !== undefined) {
             ptx.type = ethers.BigNumber.from(await txOptions.type).toNumber();
         }
 

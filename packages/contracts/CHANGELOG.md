@@ -1,5 +1,11 @@
 # @derivation-tech/contracts
 
+## 1.0.1
+
+### Patch Changes
+
+- Fix txOptions.type, publish to private packages
+
 ## 1.0.0
 
 ### Major Changes
