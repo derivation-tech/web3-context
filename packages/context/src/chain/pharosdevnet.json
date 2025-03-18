@@ -1,0 +1,32 @@
+{
+    "chainName": "pharosdevnet",
+    "chainId": 50002,
+    "chainAlias": ["pharosdevnet", "Pharos Devnet"],
+    "defaultTxType": "legacy",
+    "isTestNet": true,
+    "nativeToken": {
+        "name": "ETH",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "address": "0x997aA03eE41e4555f531B9C75Ed0CFE950A94d4C",
+        "symbol": "WETH",
+        "decimals": 18
+    },
+    "explorer": "https://pharosscan.xyz/",
+    "tokenAssistant": "0x57C2beA8e020af706f737836061F23ca1E9fd8a5",
+    "multicall3": "0xA9A78c647561A3823F1E48b4e151318Ed42C4eC4",
+    "erc20": [
+        {
+            "name": "USDM",
+            "address": "0x46b1A929Fda6198174c0ba41E87771F16f679a4B",
+            "symbol": "USDM",
+            "decimals": 18
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}
