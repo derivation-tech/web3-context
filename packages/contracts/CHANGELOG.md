@@ -1,5 +1,17 @@
 # @derivation-tech/contracts
 
+## 1.0.3
+
+### Patch Changes
+
+- Fix build
+
+## 1.0.2
+
+### Patch Changes
+
+- support pharos devnet
+
 ## 1.0.1
 
 ### Patch Changes

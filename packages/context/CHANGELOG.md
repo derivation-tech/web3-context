@@ -1,5 +1,21 @@
 # @derivation-tech/context
 
+## 1.0.3
+
+### Patch Changes
+
+- Fix build
+- Updated dependencies
+    - @derivation-tech/contracts@1.0.3
+
+## 1.0.2
+
+### Patch Changes
+
+- support pharos devnet
+- Updated dependencies
+    - @derivation-tech/contracts@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
