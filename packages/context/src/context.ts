@@ -35,6 +35,10 @@ export interface Option {
     providerOps?: {
         url?: string;
         wss?: string;
+        receipt?: {
+            timeout?: number;
+            pollingInterval?: number;
+        };
     };
     loggerOps?: {
         level?: LogLevel;
@@ -106,10 +110,16 @@ export class Context implements BaseContext {
         this.info = info;
         this._initLogger(option);
         if (option.providerOps?.url) {
-            this.setProvider(getProvider(option.providerOps.url));
+            this.setProvider(
+                getProvider(
+                    option.providerOps.url,
+                    option.providerOps?.receipt?.timeout,
+                    option.providerOps?.receipt?.pollingInterval,
+                ),
+            );
         }
         if (option.providerOps?.wss) {
-            this.wssProvider = getWssProvider(option.providerOps.wss);
+            this.wssProvider = getWssProvider(option.providerOps.wss, option.providerOps?.receipt?.pollingInterval);
         }
         this.registerTokenInfo(info.nativeToken);
         this.registerTokenInfo(info.wrappedNativeToken);
