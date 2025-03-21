@@ -2,16 +2,20 @@ import WebSocket from 'ws';
 import { ethers } from 'ethers';
 import { CHAIN_ID } from './constant';
 
-export function getProvider(url: string, timeout = 20000): ethers.providers.JsonRpcProvider {
-    return new ethers.providers.JsonRpcProvider({
+export function getProvider(url: string, timeout = 20000, pollingInterval = 4000): ethers.providers.JsonRpcProvider {
+    const provider = new ethers.providers.JsonRpcProvider({
         url,
         timeout: timeout,
     });
+    provider.pollingInterval = pollingInterval;
+    return provider;
 }
 
-export function getWssProvider(url: string): ethers.providers.WebSocketProvider {
+export function getWssProvider(url: string, pollingInterval = 4000): ethers.providers.WebSocketProvider {
     const ws = new WebSocket(url);
-    return new ethers.providers.WebSocketProvider(ws);
+    const provider = new ethers.providers.WebSocketProvider(ws);
+    provider.pollingInterval = pollingInterval;
+    return provider;
 }
 
 export function getProviderHeaders(network: CHAIN_ID, type: 'RPC' | 'WSS'): Record<string, string> {
