@@ -4,10 +4,6 @@
     "description": "Common core utilities to interact with the web3 world",
     "author": "derivation-tech",
     "license": "MIT",
-    "private": true,
-    "workspaces": [
-        "packages/*"
-    ],
     "scripts": {
         "preinstall": "npx -y only-allow pnpm",
         "postinstall": "npm run nx",
