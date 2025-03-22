@@ -96,13 +96,11 @@ export class Context implements BaseContext {
 
     constructor(
         chanIdOrName: CHAIN_ID | string,
-        providerOps?: { url: string } | { wss: string },
         option: Partial<Option> = DEFAULT_OPTION,
     ) {
         const info = getChainInfo(chanIdOrName);
         this._init(info, {
             ...option,
-            providerOps,
         });
     }
 
