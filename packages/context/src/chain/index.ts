@@ -22,6 +22,9 @@ import Manta from './manta.json';
 import BeraBartio from './berabartio.json';
 import MonadTestnet from './monadTestnet.json';
 import PharosDevnet from './pharosdevnet.json';
+import AvalancheInfo from './avalanche.json';
+import GnosisInfo from './gnosis.json';
+
 import { ContextCoreError } from '../error';
 
 export function getChainInfo(nameOrId: string | number): ChainInfo {
@@ -48,7 +51,9 @@ export function getChainInfo(nameOrId: string | number): ChainInfo {
         Manta,
         BeraBartio,
         MonadTestnet,
-        PharosDevnet
+        PharosDevnet,
+        AvalancheInfo,
+        GnosisInfo
     ];
     for (const info of allInfos) {
         if (typeof nameOrId === 'number' && info.chainId === nameOrId) {
