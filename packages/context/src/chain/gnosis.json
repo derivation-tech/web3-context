@@ -1,0 +1,55 @@
+{
+    "chainName": "Gnosis",
+    "chainId": 100,
+    "chainAlias": ["gnosis"],
+    "defaultTxType": "eip1559",
+    "nativeToken": {
+        "name": "xDAI",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "xDAI",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped xDAI",
+        "address": "0xe91d153e0b41518a2ce8dd3d7944fa863463a97d",
+        "symbol": "WXDAI",
+        "decimals": 18
+    },
+    "explorer": "https://gnosisscan.io/",
+    "tokenAssistant": "0x063a2FEDbd0c6160c5f8B83168d9A64d47310cAA",
+    "multicall3": "0xcA11bde05977b3631167028862bE2a173976CA11",
+    "erc20": [
+        {
+            "name": "Tether USD on xDai",
+            "address": "0x4ECaBa5870353805a9F068101A40E0f32ed605C6",
+            "symbol": "USDT",
+            "decimals": 6
+        },
+        {
+            "name": "Bridged USDC",
+            "address": "0x2a22f9c3b484c3629090FeED35F17Ff8F88f76F0",
+            "symbol": "USDC.e",
+            "decimals": 6
+        },
+        {
+            "name": "USD Coin",
+            "address": "0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83",
+            "symbol": "USDC",
+            "decimals": 6
+        },
+        {
+            "name": "Wrapped BTC on xDai",
+            "address": "0x8e5bBbb09Ed1ebdE8674Cda39A0c169401db4252",
+            "symbol": "WBTC",
+            "decimals": 8
+        },
+        {
+            "name": "Wrapped ETH on xDai",
+            "address": "0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1",
+            "symbol": "WETH",
+            "decimals": 18
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}
