@@ -138,6 +138,12 @@
             "symbol": "BTT",
             "address": "0x8595F9dA7b868b1822194fAEd312235E43007b49",
             "decimals": 18
+        },
+        {
+            "name": "SynFutures",
+            "symbol": "F",
+            "address": "0xc9cCbd76c2353e593Cc975F13295e8289d04D3Bb",
+            "decimals": 18
         }
     ],
     "erc721": [],

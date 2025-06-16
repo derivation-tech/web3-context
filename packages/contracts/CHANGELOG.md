@@ -1,5 +1,11 @@
 # @derivation-tech/contracts
 
+## 1.0.6
+
+### Patch Changes
+
+- Update bsc network config
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @derivation-tech/tx-plugin
 
+## 1.0.6
+
+### Patch Changes
+
+- Update bsc network config
+- Updated dependencies
+    - @derivation-tech/context@1.0.6
+    - @derivation-tech/contracts@1.0.6
+
 ## 1.0.3
 
 ### Patch Changes
