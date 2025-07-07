@@ -1,5 +1,17 @@
 # @derivation-tech/contracts
 
+## 1.0.8
+
+### Patch Changes
+
+- Fix base-sepolia config
+
+## 1.0.7
+
+### Patch Changes
+
+- Add base-sepolia config
+
 ## 1.0.6
 
 ### Patch Changes
