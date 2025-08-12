@@ -25,6 +25,7 @@ import PharosDevnet from './pharosdevnet.json';
 import AvalancheInfo from './avalanche.json';
 import GnosisInfo from './gnosis.json';
 import BaseSepolia from './baseSepolia.json';
+import GelatoInfo from './gelato.json';
 
 import { ContextCoreError } from '../error';
 
@@ -55,7 +56,8 @@ export function getChainInfo(nameOrId: string | number): ChainInfo {
         PharosDevnet,
         AvalancheInfo,
         GnosisInfo,
-        BaseSepolia
+        BaseSepolia,
+        GelatoInfo
     ];
     for (const info of allInfos) {
         if (typeof nameOrId === 'number' && info.chainId === nameOrId) {
