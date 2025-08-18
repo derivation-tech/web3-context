@@ -31,7 +31,8 @@ export enum CHAIN_ID {
     AVALANCHE = 43114,
     BASESEPOLIA = 84532,
     GELATO = 123420001840,
-    CONDUIT = 19908
+    CONDUIT = 19908,
+    ALTLAYER = 112245
 }
 
 export const PREFIX = '├─';
