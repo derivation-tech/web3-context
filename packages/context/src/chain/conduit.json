@@ -1,0 +1,31 @@
+{
+    "chainName": "Conduit",
+    "chainId": 19908,
+    "chainAlias": ["conduit"],
+    "defaultTxType": "eip1559",
+    "nativeToken": {
+        "name": "MockF",
+        "address": "0x62D95e394397E415A8205295b6C9ae2C0e31a025",
+        "symbol": "MOCKF",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped MockF",
+        "address": "0x62D95e394397E415A8205295b6C9ae2C0e31a025",
+        "symbol": "WMOCKF",
+        "decimals": 18
+    },
+    "explorer": "https://explorer-synfutures-conduit-testnet-uhp5n29sxw.t.conduit.xyz/",
+    "tokenAssistant": "0xc415234d35f5B207558A604244E7435EFEeEdF4a",
+    "multicall3": "0x9c0298AfB9b1408B2E4236475F417068911e3e96",
+    "erc20": [
+        {
+            "name": "USD Mock Token",
+            "address": "0x8da593B1084727DD82212A0b812415851F29cdec",
+            "symbol": "USDM",
+            "decimals": 6
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

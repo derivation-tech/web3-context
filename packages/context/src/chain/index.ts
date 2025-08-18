@@ -26,7 +26,7 @@ import AvalancheInfo from './avalanche.json';
 import GnosisInfo from './gnosis.json';
 import BaseSepolia from './baseSepolia.json';
 import GelatoInfo from './gelato.json';
-
+import ConduitInfo from './conduit.json';
 import { ContextCoreError } from '../error';
 
 export function getChainInfo(nameOrId: string | number): ChainInfo {
@@ -57,7 +57,8 @@ export function getChainInfo(nameOrId: string | number): ChainInfo {
         AvalancheInfo,
         GnosisInfo,
         BaseSepolia,
-        GelatoInfo
+        GelatoInfo,
+        ConduitInfo
     ];
     for (const info of allInfos) {
         if (typeof nameOrId === 'number' && info.chainId === nameOrId) {

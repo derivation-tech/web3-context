@@ -30,7 +30,8 @@ export enum CHAIN_ID {
     GNOSIS = 100,
     AVALANCHE = 43114,
     BASESEPOLIA = 84532,
-    GELATO = 123420001840
+    GELATO = 123420001840,
+    CONDUIT = 19908
 }
 
 export const PREFIX = '├─';
