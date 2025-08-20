@@ -1,6 +1,6 @@
 {
     "name": "@derivation-tech/tx-plugin",
-    "version": "1.0.8-appchain.3",
+    "version": "1.0.8-appchain.3.1",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -17,8 +17,8 @@
         "build:check": "node -e \"require('./dist-node')\""
     },
     "dependencies": {
-        "@derivation-tech/context": "workspace:^",
-        "@derivation-tech/contracts": "workspace:^",
+        "@derivation-tech/context": "workspace:*",
+        "@derivation-tech/contracts": "workspace:*",
         "ethers": "catalog:",
         "async-retry": "catalog:",
         "chalk": "catalog:"
