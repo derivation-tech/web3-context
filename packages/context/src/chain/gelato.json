@@ -23,7 +23,7 @@
             "name": "USD Mock Token",
             "address": "0x52d51093652857323D3EC7A7962FbE36be55968A",
             "symbol": "USDM",
-            "decimals": 18
+            "decimals": 6
         }
     ],
     "erc721": [],
