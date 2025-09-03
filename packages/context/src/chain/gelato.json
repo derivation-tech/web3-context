@@ -1,8 +1,8 @@
 {
     "chainName": "Gelato",
-    "chainId": 123420001840,
+    "chainId": 420001846,
     "chainAlias": ["gelato"],
-    "defaultTxType": "eip1559",
+    "defaultTxType": "legacy",
     "nativeToken": {
         "name": "MockF",
         "address": "0x0000000000000000000000000000000000000000",
@@ -11,17 +11,17 @@
     },
     "wrappedNativeToken": {
         "name": "Wrapped MockF",
-        "address": "0xDA7B4378FF634b35646F93400B56c65a0Cc39C69",
+        "address": "0x9c0298AfB9b1408B2E4236475F417068911e3e96",
         "symbol": "WMOCKF",
         "decimals": 18
     },
-    "explorer": "https://mysterious-present-place.cloud.blockscout.com/",
-    "tokenAssistant": "0xc415234d35f5B207558A604244E7435EFEeEdF4a",
-    "multicall3": "0x9c0298AfB9b1408B2E4236475F417068911e3e96",
+    "explorer": "https://synfutures-testnet.cloud.blockscout.com/",
+    "tokenAssistant": "0xA5E501c378adA03268aF9FD20D2Ed93000EdcAB8",
+    "multicall3": "0x69775e2767373c86c6A0cF5D30D9EE424De7c2a5",
     "erc20": [
         {
             "name": "USD Mock Token",
-            "address": "0x52d51093652857323D3EC7A7962FbE36be55968A",
+            "address": "0x8da593B1084727DD82212A0b812415851F29cdec",
             "symbol": "USDM",
             "decimals": 6
         }
