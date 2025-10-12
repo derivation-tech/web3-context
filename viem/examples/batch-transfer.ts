@@ -6,7 +6,7 @@
 import 'dotenv/config';
 import { createPublicClient, createWalletClient, http } from 'viem';
 import { mnemonicToAccount } from 'viem/accounts';
-import { ChainInstance, batchSendTxWithLog, LoggerFactory, LogLevel, type Address } from '../index.js';
+import { KitInstance, batchSendTxWithLog, LoggerFactory, LogLevel, type Address } from '../index.js';
 import { abctest } from '../chains/abctest.js';
 
 const logger = LoggerFactory.getLogger('Batch-Transfer', LogLevel.Info);
@@ -23,7 +23,7 @@ async function batchTransfer() {
     // ==========================================
     // STEP 1: Setup ChainKit
     // ==========================================
-    const kit = ChainInstance.for(abctest);
+    const kit = KitInstance.for(abctest);
     kit.registerErc20Token({
         symbol: 'USDM',
         name: 'Test USDM',

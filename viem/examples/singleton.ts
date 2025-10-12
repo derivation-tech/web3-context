@@ -1,5 +1,5 @@
 /**
- * Example: Using ChainInstance Singleton Pattern
+ * Example: Using KitInstance Singleton Pattern
  *
  * Shows how to use registries without Context wrapper
  * - Direct viem client access
@@ -10,13 +10,13 @@
 import { createPublicClient, createWalletClient, http, parseAbi, decodeEventLog } from 'viem';
 import { base } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
-import { ChainInstance, type Address } from './index.js';
+import { KitInstance, type Address } from './index.js';
 
 // ==========================================
 // SETUP: Initialize Base chain registry (once, anywhere)
 // ==========================================
 function initBaseRegistry() {
-    const baseCtx = ChainInstance.for('base');
+    const baseCtx = KitInstance.for('base');
 
     // Register tokens (auto-creates ERC20 parsers with decimals!)
     baseCtx.registerErc20Token({
@@ -54,7 +54,7 @@ async function example1_readBalances() {
     });
 
     // Access singleton registry
-    const baseCtx = ChainInstance.for('base');
+    const baseCtx = KitInstance.for('base');
 
     const balance = await publicClient.readContract({
         address: baseCtx.getErc20TokenInfo('usdc')!.address,
@@ -94,7 +94,7 @@ async function example2_sendTxWithParsing() {
     });
 
     // Access singleton registry
-    const baseCtx = ChainInstance.for('base');
+    const baseCtx = KitInstance.for('base');
     const usdc = baseCtx.getErc20TokenInfo('usdc')!;
 
     // Send transaction (pure viem, no wrapper!)
@@ -140,11 +140,11 @@ async function example3_crossFileAccess() {
     console.log('\n🔗 Example 3: Cross-File Access\n');
 
     // File 1: balance.ts
-    const file1Access = ChainInstance.for(8453); // By ID
+    const file1Access = KitInstance.for(8453); // By ID
     console.log('File 1 sees USDC?', file1Access.getToken('usdc')?.symbol);
 
     // File 2: transfer.ts (different file, same singleton!)
-    const file2Access = ChainInstance.for('base'); // By name
+    const file2Access = KitInstance.for('base'); // By name
     console.log('File 2 sees USDC?', file2Access.getToken('usdc')?.symbol);
 
     // Prove they're the same instance
@@ -158,7 +158,7 @@ async function example4_multipleChains() {
     console.log('\n🌐 Example 4: Multiple Chains\n');
 
     // Initialize Base
-    const baseCtx = ChainInstance.for('base');
+    const baseCtx = KitInstance.for('base');
     baseCtx.registerErc20Token({
         symbol: 'USDC',
         address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' as Address,
@@ -166,7 +166,7 @@ async function example4_multipleChains() {
     });
 
     // Initialize Optimism (separate singleton!)
-    const opCtx = ChainInstance.for('optimism');
+    const opCtx = KitInstance.for('optimism');
     opCtx.registerErc20Token({
         symbol: 'USDC',
         address: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85' as Address,
@@ -179,7 +179,7 @@ async function example4_multipleChains() {
 
     console.log(
         '\nAll initialized chains:',
-        ChainInstance.getAll().map((c) => c.chain.name)
+        KitInstance.getAll().map((c) => c.chain.name)
     );
 }
 

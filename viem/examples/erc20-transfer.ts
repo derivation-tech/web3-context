@@ -10,14 +10,14 @@
 import { createPublicClient, createWalletClient, http, parseAbi } from 'viem';
 import { base } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
-import { ChainInstance, sendTxWithLog, type Address } from '../index.js';
+import { KitInstance, sendTxWithLog, type Address } from '../index.js';
 import { ERC20_ABI } from '../abis/index.js';
 
 async function erc20TransferExample() {
     // ==========================================
     // STEP 1: Setup ChainKit singleton
     // ==========================================
-    const kit = ChainInstance.for('base');
+    const kit = KitInstance.for('base');
 
     // Register USDC (auto-creates ERC20 parser with decimal formatting!)
     kit.registerErc20Token({
@@ -87,7 +87,7 @@ async function erc20TransferExample() {
 // ALTERNATIVE: Manual logging (more control)
 // ==========================================
 async function manualLogging() {
-    const kit = ChainInstance.for('base');
+    const kit = KitInstance.for('base');
     kit.registerErc20Token({
         symbol: 'USDC',
         address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' as Address,

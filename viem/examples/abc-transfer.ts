@@ -6,7 +6,7 @@
 import 'dotenv/config';
 import { createPublicClient, createWalletClient, http } from 'viem';
 import { mnemonicToAccount } from 'viem/accounts';
-import { ChainInstance } from '../index.js';
+import { KitInstance } from '../index.js';
 import { abctest } from '../chains/abctest.js';
 import * as ERC20 from '../erc20.js';
 
@@ -19,7 +19,7 @@ async function transferUSDM() {
     // ==========================================
     // STEP 1: Setup ChainKit for ABC testnet
     // ==========================================
-    const kit = ChainInstance.for(abctest);
+    const kit = KitInstance.for(abctest);
 
     // Register USDM token (auto-creates ERC20 parser with decimal formatting!)
     kit.registerErc20Token({

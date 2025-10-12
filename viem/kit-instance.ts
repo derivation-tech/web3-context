@@ -4,9 +4,9 @@ import { ChainKit } from './chain-kit';
 import { getWrappedNativeToken } from './tokens/wrapped';
 
 /**
- * ChainInstance - Global singleton map of chainId → ChainKit
+ * KitInstance - Global singleton map of chainId → ChainKit
  */
-export class ChainInstance {
+export class KitInstance {
     private static instances = new Map<number, ChainKit>();
 
     /**
@@ -15,9 +15,9 @@ export class ChainInstance {
      * @returns ChainKit singleton for the chain
      *
      * @example
-     * const base = ChainInstance.for('base');
-     * const optimism = ChainInstance.for(10);
-     * const custom = ChainInstance.for(myCustomChain);
+     * const base = KitInstance.for('base');
+     * const optimism = KitInstance.for(10);
+     * const custom = KitInstance.for(myCustomChain);
      */
     static for(chainIdOrNameOrChain: number | string | Chain): ChainKit {
         let chainId: number;
@@ -33,7 +33,7 @@ export class ChainInstance {
             chain = Object.values(chains).find((c: any) => c?.id === chainId) as Chain;
             if (!chain)
                 throw new Error(
-                    `Chain ID ${chainId} not found in viem chains. Use ChainInstance.for(customChain) for custom chains.`
+                    `Chain ID ${chainId} not found in viem chains. Use KitInstance.for(customChain) for custom chains.`
                 );
         } else {
             // Find chain by name

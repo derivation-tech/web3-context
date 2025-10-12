@@ -4,7 +4,7 @@
  */
 
 import { createPublicClient, http } from 'viem';
-import { ChainInstance } from './index.js';
+import { KitInstance } from './index.js';
 import { abctest } from './chains/abctest.js';
 
 async function abcTestnetExample() {
@@ -31,7 +31,7 @@ async function abcTestnetExample() {
     // ==========================================
     // METHOD 2: Use with ChainKit (singleton)
     // ==========================================
-    const kit = ChainInstance.for(abctest); // Pass custom chain object
+    const kit = KitInstance.for(abctest); // Pass custom chain object
 
     // Register USDM token (auto-creates ERC20 parser!)
     kit.registerErc20Token({
