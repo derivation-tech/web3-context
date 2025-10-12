@@ -4,7 +4,7 @@ A robust, clean, and efficient `viem`-based utility library for interacting with
 
 ## Features
 
-- **Singleton Chain Management**: `KitInstance` provides per-chain utilities
+- **Singleton Chain Management**: `ChainKitRegistry` provides per-chain utilities
 - **Address Book**: Human-readable address mapping with case-insensitive lookups
 - **Token Registry**: ERC20 token information with decimals and formatting
 - **Contract Parsers**: Custom parsers for better transaction/event logging
@@ -25,7 +25,7 @@ npm install @derivation-tech/viem-context
 ```typescript
 import { createPublicClient, createWalletClient, http } from 'viem';
 import { base } from 'viem/chains';
-import { KitInstance, ERC20, WETH } from '@derivation-tech/viem-context';
+import { ChainKitRegistry, ERC20, WETH } from '@derivation-tech/viem-context';
 import { mnemonicToAccount } from 'viem/accounts';
 
 // Setup
@@ -40,7 +40,7 @@ const walletClient = createWalletClient({
     transport: http(),
 });
 
-const kit = KitInstance.for(base);
+const kit = ChainKitRegistry.for(base);
 
 // Query ERC20 balance
 const usdcAddress = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
@@ -55,14 +55,14 @@ console.log(`Deposited 0.1 ETH to WETH: ${receipt.transactionHash}`);
 
 ## Core Components
 
-### KitInstance
+### ChainKitRegistry
 
 Singleton manager for chain-specific utilities:
 
 ```typescript
-import { KitInstance } from '@derivation-tech/viem-context';
+import { ChainKitRegistry } from '@derivation-tech/viem-context';
 
-const kit = KitInstance.for(base);
+const kit = ChainKitRegistry.for(base);
 // Returns the same instance for base chain across your app
 ```
 
@@ -204,7 +204,7 @@ See the `examples/` directory for complete examples:
 
 ## API Reference
 
-### KitInstance
+### ChainKitRegistry
 
 - `for(chain: Chain): ChainKit` - Get or create ChainKit for chain
 

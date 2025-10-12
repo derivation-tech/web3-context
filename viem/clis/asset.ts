@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import { createPublicClient, createWalletClient, http, parseEther, formatEther, getAddress } from 'viem';
 import { mnemonicToAccount, privateKeyToAccount } from 'viem/accounts';
-import { KitInstance, ERC20, type Address } from '../index';
+import { ChainKitRegistry, ERC20, type Address } from '../index';
 import 'dotenv/config';
 
 /**
@@ -67,12 +67,12 @@ function getAddressFromMnemonic(name: string, index: number): Address {
 // Handler functions
 async function handleBalance(args: string[], options: any) {
     const [tokenSymbols] = args;
-    const { network, address, showkey } = options;
+    const { network, address } = options;
 
     console.log(`\n💰 Balance Query on ${network.toUpperCase()}\n`);
 
     // Get chain context
-    const kit = KitInstance.for(network);
+    const kit = ChainKitRegistry.for(network);
     const publicClient = createPublicClient({
         chain: kit.chain,
         transport: http(),
@@ -151,7 +151,7 @@ async function handleTransfer(args: string[], options: any) {
     console.log(`\n💸 Transfer on ${network.toUpperCase()}\n`);
 
     // Get chain context
-    const kit = KitInstance.for(network);
+    const kit = ChainKitRegistry.for(network);
     const publicClient = createPublicClient({
         chain: kit.chain,
         transport: http(),
@@ -368,7 +368,6 @@ const main = async () => {
             'Comma-separated list of addresses (supports alice:0, bob:0-5, charlie)',
             parseAddresses
         )
-        .option('--showkey', 'Show private keys (not implemented)')
         .action(handleBalance);
 
     // Transfer command

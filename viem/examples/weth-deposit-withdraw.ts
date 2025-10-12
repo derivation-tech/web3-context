@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { createPublicClient, createWalletClient, http, parseEther } from 'viem';
 import { base } from 'viem/chains';
-import { KitInstance, WETH, ERC20 } from '../index';
+import { ChainKitRegistry, WETH, ERC20 } from '../index';
 import { mnemonicToAccount } from 'viem/accounts';
 
 async function main() {
@@ -9,7 +9,7 @@ async function main() {
 
     // Setup
     const chain = base;
-    const kit = KitInstance.for(chain);
+    const kit = ChainKitRegistry.for(chain);
     const account = mnemonicToAccount(process.env.NEO_MNEMONIC!, { addressIndex: 0 });
 
     const publicClient = createPublicClient({
