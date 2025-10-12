@@ -1,9 +1,9 @@
 import { createPublicClient, createWalletClient, http, parseEther, formatEther } from 'viem';
 import type { Address, Hash, Chain, PublicClient, WalletClient, TransactionReceipt } from 'viem';
-import { KitInstance } from './kit-instance';
-import { ChainKit } from './chain-kit';
-import { sendTxWithLog } from './tx-helpers';
-import { WETH_ABI } from './abis';
+import { KitInstance } from '../kit-instance';
+import { ChainKit } from '../chain-kit';
+import { sendTxWithLog } from '../tx-helpers';
+import { WETH_ABI } from '../abis';
 
 /**
  * Deposit native token to get wrapped native token (with logging)

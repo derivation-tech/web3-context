@@ -1,4 +1,13 @@
-import type { Address, Abi, ContractFunctionName, ContractFunctionArgs, ContractEventName, ContractEventArgs, ContractErrorName, ContractErrorArgs } from 'viem';
+import type {
+    Address,
+    Abi,
+    ContractFunctionName,
+    ContractFunctionArgs,
+    ContractEventName,
+    ContractEventArgs,
+    ContractErrorName,
+    ContractErrorArgs,
+} from 'viem';
 import { formatUnits } from 'viem';
 import type { ContractParser, Erc20TokenInfo } from '../types';
 import { ERC20_ABI } from '../abis';
@@ -12,7 +21,7 @@ type ERC20Abi = typeof ERC20_ABI;
  */
 export function createERC20Parser(
     tokenInfo: Erc20TokenInfo,
-    resolveAddress: (addr: Address) => string,
+    resolveAddress: (addr: Address) => string
 ): ContractParser<ERC20Abi> {
     // Helper functions
     const formatAmount = (amt: bigint) => formatUnits(amt, tokenInfo.decimals);

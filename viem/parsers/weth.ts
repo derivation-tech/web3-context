@@ -1,4 +1,13 @@
-import type { Address, Abi, ContractFunctionName, ContractFunctionArgs, ContractEventName, ContractEventArgs, ContractErrorName, ContractErrorArgs } from 'viem';
+import type {
+    Address,
+    Abi,
+    ContractFunctionName,
+    ContractFunctionArgs,
+    ContractEventName,
+    ContractEventArgs,
+    ContractErrorName,
+    ContractErrorArgs,
+} from 'viem';
 import { formatUnits } from 'viem';
 import type { ContractParser, Erc20TokenInfo } from '../types';
 import { WETH_ABI } from '../abis';
@@ -12,7 +21,7 @@ type WETHAbi = typeof WETH_ABI;
  */
 export function createWETHParser(
     tokenInfo: Erc20TokenInfo,
-    resolveAddress: (addr: Address) => string,
+    resolveAddress: (addr: Address) => string
 ): ContractParser<WETHAbi> {
     // Helper functions
     const formatAmount = (amt: bigint) => formatUnits(amt, tokenInfo.decimals);
@@ -106,4 +115,3 @@ export function createWETHParser(
         },
     };
 }
-

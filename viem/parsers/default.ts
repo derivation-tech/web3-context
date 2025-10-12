@@ -1,4 +1,13 @@
-import type { Address, Abi, ContractFunctionName, ContractFunctionArgs, ContractEventName, ContractEventArgs, ContractErrorName, ContractErrorArgs } from 'viem';
+import type {
+    Address,
+    Abi,
+    ContractFunctionName,
+    ContractFunctionArgs,
+    ContractEventName,
+    ContractEventArgs,
+    ContractErrorName,
+    ContractErrorArgs,
+} from 'viem';
 import type { ContractParser } from '../types';
 
 /**
@@ -22,7 +31,9 @@ export function createDefaultParser(resolveAddressName: (addr: Address) => strin
                 return String(val);
             };
 
-            const argsStr = (tx.args as ContractFunctionArgs<Abi, 'nonpayable' | 'payable', ContractFunctionName<Abi>>).map(formatValue).join(', ');
+            const argsStr = (tx.args as ContractFunctionArgs<Abi, 'nonpayable' | 'payable', ContractFunctionName<Abi>>)
+                .map(formatValue)
+                .join(', ');
             return `${tx.functionName}(${argsStr})`;
         },
 
@@ -35,4 +46,3 @@ export function createDefaultParser(resolveAddressName: (addr: Address) => strin
         },
     };
 }
-

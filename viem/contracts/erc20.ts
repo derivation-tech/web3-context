@@ -5,9 +5,9 @@
  */
 
 import type { PublicClient, WalletClient, Address, TransactionReceipt } from 'viem';
-import type { ChainKit } from './chain-kit';
-import { sendTxWithLog, sendTxSilent } from './tx-helpers';
-import { ERC20_ABI } from './abis';
+import type { ChainKit } from '../chain-kit';
+import { sendTxWithLog, sendTxSilent } from '../tx-helpers';
+import { ERC20_ABI } from '../abis';
 
 /**
  * Get ERC20 balance

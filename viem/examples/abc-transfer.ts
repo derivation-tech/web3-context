@@ -8,7 +8,7 @@ import { createPublicClient, createWalletClient, http } from 'viem';
 import { mnemonicToAccount } from 'viem/accounts';
 import { KitInstance } from '../index.js';
 import { abctest } from '../chains/abctest.js';
-import * as ERC20 from '../erc20.js';
+import * as ERC20 from '../contracts/erc20.js';
 
 // Removed logger - using console.log instead
 
@@ -77,7 +77,14 @@ async function transferUSDM() {
     // ==========================================
     // STEP 5: Transfer (ERC20 helper with logging!)
     // ==========================================
-    await ERC20.transfer(publicClient, walletClient, kit, usdm.address, neo1.address, kit.parseErc20Amount('100', 'usdm'));
+    await ERC20.transfer(
+        publicClient,
+        walletClient,
+        kit,
+        usdm.address,
+        neo1.address,
+        kit.parseErc20Amount('100', 'usdm')
+    );
 
     // ==========================================
     // STEP 6: Check balances after (ERC20 helper!)

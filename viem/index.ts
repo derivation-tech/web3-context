@@ -9,8 +9,8 @@ export { LoggerFactory, ConsoleLogger, LogLevel, type BaseLogger } from './logge
 export { createERC20Parser } from './parsers/erc20';
 export { createWETHParser } from './parsers/weth';
 export { sendTxWithLog, sendTxSilent, batchSendTxWithLog, batchSendTxSilent, type TxRequest } from './tx-helpers';
-export * as ERC20 from './erc20';
-export * as WETH from './weth';
+export * as ERC20 from './contracts/erc20';
+export * as WETH from './contracts/weth';
 
 // Type exports
 export type { Erc20TokenInfo, ContractParser } from './types';
