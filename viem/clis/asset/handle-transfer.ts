@@ -35,7 +35,7 @@ export async function handleTransfer(args: string[], options: any) {
 
     for (const fromSpec of from) {
         try {
-            const { account } = getAccount(kit, fromSpec);
+            const account = getAccount(kit, fromSpec);
             accounts.push(account);
             fromAddresses.push(account.address as Address);
         } catch (error) {
@@ -181,5 +181,3 @@ export async function handleTransfer(args: string[], options: any) {
 
     logger.info('');
 }
-
-

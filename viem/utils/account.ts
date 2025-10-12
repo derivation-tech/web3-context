@@ -15,7 +15,7 @@ const accountCache = new Map<string, Account>();
 export function getAccount(
     kit: ChainKit,
     signerIdOrPrivateKeyName: string
-): { account: Account } {
+): Account {
     let derivedAddress: Address;
     let account: Account;
 
@@ -27,7 +27,7 @@ export function getAccount(
 
         const cached = accountCache.get(cacheKey);
         if (cached) {
-            return { account: cached };
+            return cached;
         }
         const envMnemonic = `${upper}_MNEMONIC`;
         const mnemonic = process.env[envMnemonic];
@@ -38,7 +38,7 @@ export function getAccount(
         derivedAddress = getAddress(account.address as Address);
         kit.registerAddressName(derivedAddress, `${name}:${indexNum}`);
         accountCache.set(cacheKey, account);
-        return { account };
+        return account;
     }
 
     const name = signerIdOrPrivateKeyName;
@@ -47,7 +47,7 @@ export function getAccount(
     const cacheKey = `${upper}`;
     const cached = accountCache.get(cacheKey);
     if (cached) {
-        return { account: cached };
+        return cached;
     }
 
     const envMnemonic = `${upper}_MNEMONIC`;
@@ -64,7 +64,7 @@ export function getAccount(
         derivedAddress = getAddress(account.address as Address);
         kit.registerAddressName(derivedAddress, `${name}:0`);
         accountCache.set(cacheKey, account);
-        return { account };
+        return account;
     }
 
     if (privateKey) {
@@ -72,7 +72,7 @@ export function getAccount(
         derivedAddress = getAddress(account.address as Address);
         kit.registerAddressName(derivedAddress, name);
         accountCache.set(cacheKey, account);
-        return { account };
+        return account;
     }
 
     throw new Error(`No credentials found. Set ${envMnemonic} or ${envPrivateKey}.`);

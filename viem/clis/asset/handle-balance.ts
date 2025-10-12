@@ -56,7 +56,7 @@ export async function handleBalance(args: string, options: any) {
         }
         // Fallback to deriving from signerId; provide precise error if credentials missing
         try {
-            const { account } = getAccount(kit, id);
+            const account = getAccount(kit, id);
             addresses.push(getAddress(account.address as Address));
         } catch (e: any) {
             const base = id.split(':')[0] || id;
