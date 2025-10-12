@@ -9,6 +9,7 @@ import { getWrappedNativeToken } from './tokens/wrapped';
 import { getCommonErc20Tokens } from './tokens/erc20';
 import type { Erc20TokenInfo, ContractParser } from './types';
 import type { PublicClient, WalletClient } from 'viem';
+import { mnemonicToAccount, privateKeyToAccount } from 'viem/accounts';
 
 /**
  * ChainKit - Utilities for a single chain
@@ -23,6 +24,9 @@ export class ChainKit {
 
     public readonly parsers = new Map<Address, ContractParser>();
     private defaultParser?: ContractParser;
+
+    public readonly nativeTokenInfo: Erc20TokenInfo;
+    public readonly wrappedNativeTokenInfo: Erc20TokenInfo;
 
     constructor(
         chain: Chain,
@@ -40,6 +44,14 @@ export class ChainKit {
         // Set default parser with basic formatting
         this.defaultParser = createDefaultParser((addr) => this.getAddressName(addr));
 
+        // Initialize native token info
+        this.nativeTokenInfo = {
+            address: '0x0000000000000000000000000000000000000000' as Address,
+            symbol: chain.nativeCurrency.symbol,
+            name: chain.nativeCurrency.name,
+            decimals: chain.nativeCurrency.decimals,
+        };
+
         // Auto-register native token
         this.registerNativeToken();
 
@@ -52,7 +64,7 @@ export class ChainKit {
             wrappedInfo = wrappedNativeTokenInfo;
         }
 
-        // 3. Throw error if not found
+        // 3. Throw error if wrapped token not found
         if (!wrappedInfo) {
             throw new Error(
                 `No wrapped native token info found for chain ${chain.id} (${chain.name}). ` +
@@ -60,7 +72,8 @@ export class ChainKit {
             );
         }
 
-        // Register wrapped token
+        // 4. Set wrapped token info and register it
+        this.wrappedNativeTokenInfo = wrappedInfo;
         this.registerWrappedNativeToken(wrappedInfo);
 
         // Auto-load common ERC20 tokens for this chain

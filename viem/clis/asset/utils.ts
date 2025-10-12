@@ -1,13 +1,35 @@
 import type { Address } from 'viem';
 import { mnemonicToAccount, privateKeyToAccount } from 'viem/accounts';
 import { getAddress } from 'viem';
+import { base, mainnet, arbitrum, optimism, polygon } from 'viem/chains';
 
 /**
  * Utility functions for the Asset CLI
+ *
+ * Terminology:
+ * - signerId: single signer identifier like "neo:0" or "neo" (alias for "neo:0")
+ * - signerRange: contiguous range like "neo:0-10"
+ * - signerList: comma-separated list like "neo:0-10,bob:0-100"
  */
 
 /**
- * Parse comma-separated address specifications into Address array
+ * Get RPC URL for a given network with environment variable support
+ * @param network - Network name (e.g., 'base', 'mainnet', 'arbitrum')
+ * @returns RPC URL string
+ */
+export function getRpcUrl(network: string): string {
+    // Check for specific network RPC environment variable
+    const networkRpcKey = `${network.toUpperCase()}_RPC`;
+    const networkRpc = process.env[networkRpcKey];
+    if (networkRpc) {
+        return networkRpc;
+    }
+
+    throw new Error(`RPC URL not found for ${network}. Please set ${networkRpcKey} environment variable.`);
+}
+
+/**
+ * Parse comma-separated signer IDs into Address array
  * Supports formats: "alice:0", "bob:0-5", "charlie", "0x..."
  */
 export function parseAddresses(value: string): Address[] {
@@ -71,47 +93,19 @@ export function getAddressFromMnemonic(name: string, index: number): Address {
     return account.address;
 }
 
-/**
- * Extract address name from mnemonic-derived address
- * This is a reverse lookup to determine which mnemonic name generated this address
- */
-export function extractAddressName(address: Address): string | null {
-    // Try common mnemonic names and indices to find a match
-    const commonNames = ['neo', 'alice', 'bob', 'charlie', 'david'];
-    
-    for (const name of commonNames) {
-        const mnemonicKey = `${name.toUpperCase()}_MNEMONIC`;
-        const mnemonic = process.env[mnemonicKey];
-        
-        if (mnemonic) {
-            // Check indices 0-1000 to find a match
-            for (let i = 0; i <= 1000; i++) {
-                try {
-                    const derivedAddress = getAddressFromMnemonic(name, i);
-                    if (derivedAddress.toLowerCase() === address.toLowerCase()) {
-                        return `${name}:${i}`;
-                    }
-                } catch {
-                    // Skip if mnemonic is invalid
-                    break;
-                }
-            }
-        }
-    }
-    
-    return null;
-}
+
+// preRegisterAddresses removed; getAccount handles registration & caching
 
 /**
  * Create account from mnemonic or private key
  */
-export function createAccountFromSpec(fromSpec: string): { address: Address; account: any } {
+export function createAccountFromSignerId(signerId: string): { address: Address; account: any } {
     let fromAddress: Address;
     let account;
 
-    if (fromSpec.includes(':')) {
+    if (signerId.includes(':')) {
         // Mnemonic format: "alice:0"
-        const [name, index] = fromSpec.split(':');
+        const [name, index] = signerId.split(':');
         const indexNum = parseInt(index) || 0;
         fromAddress = getAddressFromMnemonic(name, indexNum);
 
@@ -123,8 +117,8 @@ export function createAccountFromSpec(fromSpec: string): { address: Address; acc
         account = mnemonicToAccount(mnemonic, { addressIndex: indexNum });
     } else {
         // Direct address or plain name
-        if (fromSpec.startsWith('0x')) {
-            fromAddress = getAddress(fromSpec);
+        if (signerId.startsWith('0x')) {
+            fromAddress = getAddress(signerId);
             // Try to get signer from environment
             if (process.env.PRIVATE_KEY) {
                 account = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`);
@@ -135,11 +129,11 @@ export function createAccountFromSpec(fromSpec: string): { address: Address; acc
             }
         } else {
             // Plain name: "alice" (same as "alice:0")
-            fromAddress = getAddressFromMnemonic(fromSpec, 0);
-            const mnemonicKey = `${fromSpec.toUpperCase()}_MNEMONIC`;
+            fromAddress = getAddressFromMnemonic(signerId, 0);
+            const mnemonicKey = `${signerId.toUpperCase()}_MNEMONIC`;
             const mnemonic = process.env[mnemonicKey];
             if (!mnemonic) {
-                throw new Error(`Mnemonic not found for ${fromSpec}. Please set ${mnemonicKey} environment variable.`);
+                throw new Error(`Mnemonic not found for ${signerId}. Please set ${mnemonicKey} environment variable.`);
             }
             account = mnemonicToAccount(mnemonic, { addressIndex: 0 });
         }

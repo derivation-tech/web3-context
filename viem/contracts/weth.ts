@@ -2,7 +2,7 @@ import { createPublicClient, createWalletClient, http, parseEther, formatEther }
 import type { Address, Hash, Chain, PublicClient, WalletClient, TransactionReceipt } from 'viem';
 import { ChainKitRegistry } from '../chain-kit-registry';
 import { ChainKit } from '../chain-kit';
-import { sendTxWithLog } from '../utils/tx-helpers';
+import { sendTxWithLog } from '../utils/tx';
 import { WETH_ABI } from '../abis';
 
 /**

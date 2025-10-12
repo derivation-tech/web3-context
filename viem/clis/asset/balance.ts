@@ -1,8 +1,8 @@
-import { createPublicClient, http, formatEther } from 'viem';
+import { createPublicClient, http, formatEther, getAddress } from 'viem';
 import type { Address } from 'viem';
-import { ChainKitRegistry, ERC20 } from '../../index';
-import { ERC20_ABI } from '../../abis';
-import { extractAddressName } from './utils';
+import { ChainKitRegistry, Multicall, type Erc20TokenInfo, LoggerFactory, getAccount } from '../../index';
+import { expandSignerIdPattern } from '../../utils/account';
+import { getRpcUrl } from './utils';
 
 // Polyfill fetch and Request for Node.js
 import fetch, { Request } from 'node-fetch';
@@ -19,124 +19,188 @@ if (typeof globalThis.Request === 'undefined') {
 
 export async function handleBalance(args: string, options: any) {
     const tokenSymbols = args;
-    const { network, address } = options;
+    const { network, addressPattern, batchSize } = options;
+    const logger = LoggerFactory.getLogger(`${network.charAt(0).toUpperCase() + network.slice(1)}::Balance`) as any;
+    logger.setTimestamp(true);
 
-    console.log(`\n💰 Balance Query on ${network.toUpperCase()}\n`);
+    logger.info(`💰 Balance Query on ${network.toUpperCase()}`);
 
     // Get chain context
     const kit = ChainKitRegistry.for(network);
+    const rpcUrl = getRpcUrl(network);
     const publicClient = createPublicClient({
         chain: kit.chain,
-        transport: http(),
+        transport: http(rpcUrl),
     });
 
-    // Register all addresses in the address book
-    for (const addr of address) {
-        // Extract name from address if it's a mnemonic-derived address
-        const name = extractAddressName(addr);
-        if (name) {
-            kit.registerAddressName(addr, name);
+    const signerIdList = expandSignerIdPattern(addressPattern);
+
+    // Build addresses from expanded signerIdPattern via getAccount; keep 0x addresses as-is.
+    const addresses: Address[] = [];
+    for (const id of signerIdList) {
+        if (!id) continue;
+        if (id.startsWith('0x')) {
+            addresses.push(getAddress(id as Address));
+            continue;
         }
+        const { account } = getAccount(kit, id);
+        addresses.push(getAddress(account.address as Address));
     }
 
     // Parse token symbols/addresses
-    const tokens = tokenSymbols.split(',').map((t) => t.trim());
+    const tokens = tokenSymbols.split(',').map((t) => t.trim()).filter(Boolean);
 
-    // Process each token
+    // Collect all token info we need to query
+    const tokensToQuery: Array<{ info: Erc20TokenInfo; type: 'native' | 'wrapped' | 'erc20' }> = [
+        { info: kit.nativeTokenInfo, type: 'native' },
+        { info: kit.wrappedNativeTokenInfo, type: 'wrapped' }
+    ];
+
+    // Add user-specified tokens (avoid duplicates)
+    const addedAddresses = new Set<string>();
+    addedAddresses.add(kit.nativeTokenInfo.address);
+    addedAddresses.add(kit.wrappedNativeTokenInfo.address);
+
+    const unknownTokenAddresses: Address[] = [];
     for (const token of tokens) {
+        // Skip native token as it's already handled above
         if (token === 'native' || token === 'eth') {
-            // Native token balance
-            console.log('📊 Native Token Balances:');
-            for (const addr of address) {
-                const balance = await publicClient.getBalance({ address: addr });
-                const formatted = formatEther(balance);
-                const name = kit.getAddressName(addr);
-                console.log(`  [${name}]${addr}: ${formatted} ${kit.chain.nativeCurrency.symbol}`);
-            }
-        } else if (token === 'wrappedNative' || token === 'weth') {
-            // Wrapped native token balance
-            const wrappedToken = kit.getErc20TokenInfo(kit.chain.contracts?.wrappedEther?.address as Address);
-            if (!wrappedToken) {
-                console.error(`❌ Wrapped native token not found for this chain`);
+            continue;
+        }
+
+        let tokenInfo;
+        if (token.startsWith('0x')) {
+            // Direct address
+            tokenInfo = kit.getErc20TokenInfo(token as Address);
+            if (!tokenInfo) {
+                // Defer resolution via multicall
+                unknownTokenAddresses.push(getAddress(token as Address));
                 continue;
             }
-
-            console.log(`📊 ${wrappedToken.symbol} Balances:`);
-            for (const addr of address) {
-                const balance = await ERC20.balanceOf(publicClient, wrappedToken.address, addr);
-                const formatted = kit.formatErc20Amount(balance, wrappedToken.address);
-                const name = kit.getAddressName(addr);
-                console.log(`  [${name}]${addr}: ${formatted}`);
-            }
         } else {
-            // ERC20 token balance - check if it's an address or symbol
-            let tokenInfo;
-
-            if (token.startsWith('0x')) {
-                // Direct address
-                tokenInfo = kit.getErc20TokenInfo(token as Address);
-                if (!tokenInfo) {
-                    console.error(`❌ Token at address ${token} not found in registry`);
-                    continue;
-                }
-            } else {
-                // Symbol lookup
-                tokenInfo = kit.getErc20TokenInfo(token);
-                if (!tokenInfo) {
-                    console.error(
-                        `❌ Token symbol ${token} not found. Available tokens: ${Array.from(kit.tokens.keys()).join(', ')}`
-                    );
-                    continue;
-                }
-            }
-
-            console.log(`📊 ${tokenInfo.symbol} Balances:`);
-
-            // Use multicall to batch balance queries and avoid rate limits
-            try {
-                const multicallResults = await publicClient.multicall({
-                    contracts: address.map(addr => ({
-                        address: tokenInfo.address,
-                        abi: ERC20_ABI,
-                        functionName: 'balanceOf',
-                        args: [addr],
-                    })),
-                });
-
-                for (let i = 0; i < address.length; i++) {
-                    const addr = address[i];
-                    const result = multicallResults[i];
-
-                    if (result.status === 'success') {
-                        const balance = result.result as bigint;
-                        const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
-                        const name = kit.getAddressName(addr);
-                        console.log(`  [${name}]${addr}: ${formatted}`);
-                    } else {
-                        const name = kit.getAddressName(addr);
-                        console.log(`  [${name}]${addr}: Error - ${result.error?.message || 'Unknown error'}`);
-                    }
-                }
-            } catch (error: any) {
-                console.log(`  Error querying ${tokenInfo.symbol} balances: ${error.message}`);
-                // Fallback to individual queries with delay
-                for (const addr of address) {
-                    try {
-                        const balance = await ERC20.balanceOf(publicClient, tokenInfo.address, addr);
-                        const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
-                        const name = kit.getAddressName(addr);
-                        console.log(`  [${name}]${addr}: ${formatted}`);
-
-                        // Add delay to avoid rate limits
-                        await new Promise(resolve => setTimeout(resolve, 100));
-                    } catch (err: any) {
-                        const name = kit.getAddressName(addr);
-                        console.log(`  [${name}]${addr}: Error - ${err.message}`);
-                    }
-                }
+            // Symbol lookup
+            tokenInfo = kit.getErc20TokenInfo(token);
+            if (!tokenInfo) {
+                throw new Error(
+                    `Unknown token symbol ${token}. Known tokens: ${Array.from(kit.tokens.keys()).join(', ')}`
+                );
             }
         }
 
-        console.log(''); // Add spacing between tokens
+        // Avoid duplicates
+        if (!addedAddresses.has(tokenInfo.address)) {
+            tokensToQuery.push({ info: tokenInfo, type: 'erc20' });
+            addedAddresses.add(tokenInfo.address);
+        }
     }
+
+    // Resolve unknown ERC20 addresses via multicall, then register & include
+    if (unknownTokenAddresses.length > 0) {
+        logger.info(`🔎 Resolving ${unknownTokenAddresses.length} ERC20 address(es) via multicall...`);
+        try {
+            const infos = await Multicall.getErc20TokenInfos(publicClient, unknownTokenAddresses);
+            for (let i = 0; i < unknownTokenAddresses.length; i++) {
+                const meta = infos[i];
+                const addr = unknownTokenAddresses[i];
+                if (meta) {
+                    const info: Erc20TokenInfo = {
+                        address: getAddress(addr),
+                        symbol: meta.symbol,
+                        name: meta.name,
+                        decimals: meta.decimals,
+                    };
+                    kit.registerErc20Token(info);
+                    if (!addedAddresses.has(info.address)) {
+                        tokensToQuery.push({ info, type: 'erc20' });
+                        addedAddresses.add(info.address);
+                    }
+                    logger.info(`✅ Registered ${info.symbol} (${info.address})`);
+                } else {
+                    logger.warn(`⚠️ Could not resolve ERC20 metadata for ${addr}`);
+                }
+            }
+        } catch (e: any) {
+            logger.warn(`⚠️ Failed to resolve ERC20 metadata via multicall: ${e?.message || e}`);
+        }
+    }
+
+    // Collect all balances for each address using multicall
+    const addressBalances: Array<{ address: Address; name: string; balances: Array<{ symbol: string; balance: bigint; formatted: string }> }> = [];
+
+    // Query native token balances using multicall3 getEthBalance with batching
+    const nativeBalances = await Multicall.getNativeBalances(publicClient, addresses, batchSize);
+
+    // Query all ERC20 token balances using multicall with batching
+    // Collect unique ERC20 token addresses (including wrapped native if not already specified)
+    const erc20TokenAddresses: Address[] = [];
+    const erc20TokenMap: Array<{ info: Erc20TokenInfo; index: number }> = [];
+
+    // Add wrapped native token if not already in user-specified tokens
+    const hasWrappedInUserTokens = tokensToQuery.slice(2).some(t => t.info.address === kit.wrappedNativeTokenInfo.address);
+    if (!hasWrappedInUserTokens) {
+        erc20TokenAddresses.push(kit.wrappedNativeTokenInfo.address);
+        erc20TokenMap.push({ info: kit.wrappedNativeTokenInfo, index: 0 });
+    }
+
+    // Add user-specified tokens
+    let userTokenStartIndex = erc20TokenAddresses.length;
+    for (let i = 2; i < tokensToQuery.length; i++) {
+        const tokenQuery = tokensToQuery[i];
+        erc20TokenAddresses.push(tokenQuery.info.address);
+        erc20TokenMap.push({ info: tokenQuery.info, index: erc20TokenAddresses.length - 1 });
+    }
+
+    const erc20Balances = await Multicall.getMultipleErc20Balances(publicClient, erc20TokenAddresses, addresses, batchSize);
+
+    // Combine all balances for each address
+    for (let i = 0; i < addresses.length; i++) {
+        const addr = addresses[i];
+        const name = kit.getAddressName(addr);
+        const balances: Array<{ symbol: string; balance: bigint; formatted: string }> = [];
+
+        // Add native token balance
+        balances.push({
+            symbol: kit.nativeTokenInfo.symbol,
+            balance: nativeBalances[i],
+            formatted: `${formatEther(nativeBalances[i])} ${kit.nativeTokenInfo.symbol}`
+        });
+
+        // Add ERC20 token balances using the mapping
+        for (const tokenMap of erc20TokenMap) {
+            const balance = erc20Balances[tokenMap.index][i];
+            balances.push({
+                symbol: tokenMap.info.symbol,
+                balance: balance,
+                formatted: kit.formatErc20Amount(balance, tokenMap.info.address)
+            });
+        }
+
+        addressBalances.push({ address: addr, name, balances });
+    }
+
+    // Print results - one line per address
+    logger.info('📊 Balance Summary:');
+    for (const addrData of addressBalances) {
+        const balanceStrings = addrData.balances.map(b => b.formatted).join(', ');
+        logger.info(`  [${addrData.name}]${addrData.address}: ${balanceStrings}`);
+    }
+
+    // Print totals - one line
+    const totalStrings: string[] = [];
+
+    // Calculate native token total
+    const nativeTotal = addressBalances.reduce((sum, addrData) => sum + addrData.balances[0].balance, 0n);
+    totalStrings.push(`${formatEther(nativeTotal)} ${kit.nativeTokenInfo.symbol}`);
+
+    // Calculate ERC20 token totals using the mapping
+    for (const tokenMap of erc20TokenMap) {
+        const total = addressBalances.reduce((sum, addrData) => {
+            // Find the balance for this token in the address balances
+            const tokenBalance = addrData.balances.find(b => b.symbol === tokenMap.info.symbol);
+            return sum + (tokenBalance?.balance || 0n);
+        }, 0n);
+        totalStrings.push(kit.formatErc20Amount(total, tokenMap.info.address));
+    }
+
+    logger.info(`📊 Totals: ${totalStrings.join(', ')}`);
 }

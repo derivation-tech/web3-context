@@ -20,6 +20,33 @@ A robust, clean, and efficient `viem`-based utility library for interacting with
 npm install @derivation-tech/viem-context
 ```
 
+## Environment Variables
+
+The CLI supports custom RPC endpoints via environment variables:
+
+```bash
+# Network-specific RPC endpoints (optional)
+export BASE_RPC=https://bot-rpc.synfutures.com/base/YOUR_API_KEY
+export MAINNET_RPC=https://eth-mainnet.g.alchemy.com/v2/YOUR_API_KEY
+export ARBITRUM_RPC=https://arb-mainnet.g.alchemy.com/v2/YOUR_API_KEY
+export OPTIMISM_RPC=https://opt-mainnet.g.alchemy.com/v2/YOUR_API_KEY
+export POLYGON_RPC=https://polygon-mainnet.g.alchemy.com/v2/YOUR_API_KEY
+
+# Mnemonic for address derivation
+export NEO_MNEMONIC="your twelve word mnemonic phrase here..."
+export ALICE_MNEMONIC="another twelve word mnemonic phrase..."
+```
+
+### Default RPC Endpoints
+
+If no environment variable is set, the CLI uses these default endpoints:
+
+- **Base**: `https://mainnet.base.org`
+- **Mainnet**: `https://eth.llamarpc.com`
+- **Arbitrum**: `https://arb1.arbitrum.io/rpc`
+- **Optimism**: `https://mainnet.optimism.io`
+- **Polygon**: `https://polygon-rpc.com`
+
 ## Quick Start
 
 ```typescript
@@ -191,6 +218,36 @@ const commonTokens = getCommonErc20Tokens(8453); // Base
 console.log(commonTokens); // Array of Erc20TokenInfo
 ```
 
+## CLI Usage
+
+The package includes a command-line interface for asset management:
+
+```bash
+# Set up environment variables
+export BASE_RPC=https://bot-rpc.synfutures.com/base/YOUR_API_KEY
+export NEO_MNEMONIC="your twelve word mnemonic phrase here..."
+
+# Query balances
+npx tsx clis/asset/index.ts balance usdc -n base --address neo:0-10
+
+# Transfer tokens
+npx tsx clis/asset/index.ts transfer usdc -n base --from neo:0 --to neo:1 --amount 100
+
+# Batch transfers
+npx tsx clis/asset/index.ts transfer usdc -n base --from neo:0-5 --to neo:6-11 --amount 10 --batch
+```
+
+### CLI Commands
+
+- `balance <token>` - Query token balances for specified addresses
+- `transfer <token>` - Transfer tokens between addresses
+- `--network, -n` - Network name (base, mainnet, arbitrum, etc.)
+- `--address` - Address specification (neo:0-100, alice:0, 0x...)
+- `--from` - Sender addresses
+- `--to` - Recipient addresses
+- `--amount` - Transfer amount
+- `--batch` - Enable batch mode for multiple transfers
+
 ## Examples
 
 See the `examples/` directory for complete examples:
@@ -255,13 +312,37 @@ try {
 }
 ```
 
+## Coding Practices
+
+### No Trailing Spaces Rule
+
+**All code must not contain trailing spaces.** This is enforced as a coding practice rule:
+
+- **ESLint**: `no-trailing-spaces: 'error'` rule is enabled
+- **Prettier**: Automatically removes trailing spaces during formatting
+- **Pre-commit Hook**: `.pre-commit-hook.sh` prevents commits with trailing spaces
+
+#### Enforcement Tools
+
+1. **Automatic Removal**: Run `find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.json" -o -name "*.md" \) -exec sed -i '' -e 's/[[:space:]]*$//' {} \;`
+2. **IDE Setup**: Configure your editor to show trailing spaces and remove them on save
+3. **Pre-commit**: Copy `.pre-commit-hook.sh` to `.git/hooks/pre-commit` to enforce this rule
+
+#### Why This Matters
+
+- **Clean diffs**: Trailing spaces create unnecessary changes in version control
+- **Consistency**: Ensures uniform code formatting across the team
+- **Readability**: Prevents invisible characters that can cause confusion
+- **Best practice**: Industry standard for clean, maintainable code
+
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests
-5. Submit a pull request
+4. Ensure no trailing spaces (run the removal command if needed)
+5. Add tests
+6. Submit a pull request
 
 ## License
 

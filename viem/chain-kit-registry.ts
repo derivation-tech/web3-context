@@ -1,5 +1,7 @@
 import type { Chain } from 'viem';
 import * as chains from 'viem/chains';
+import type { Chain as ViemChain } from 'viem';
+import { abctest } from './chains/abctest';
 import { ChainKit } from './chain-kit';
 import { getWrappedNativeToken } from './tokens/wrapped';
 
@@ -22,6 +24,9 @@ export class ChainKitRegistry {
     static for(chainIdOrNameOrChain: number | string | Chain): ChainKit {
         let chainId: number;
         let chain: Chain;
+        const localChains: Record<string, ViemChain> = {
+            abctest,
+        };
 
         // If it's already a Chain object
         if (typeof chainIdOrNameOrChain === 'object' && 'id' in chainIdOrNameOrChain) {
@@ -30,16 +35,19 @@ export class ChainKitRegistry {
         } else if (typeof chainIdOrNameOrChain === 'number') {
             chainId = chainIdOrNameOrChain;
             // Find chain by ID
-            chain = Object.values(chains).find((c: any) => c?.id === chainId) as Chain;
+            chain = (Object.values(chains) as any[]).find((c: any) => c?.id === chainId) as Chain;
+            if (!chain) {
+                chain = (Object.values(localChains) as any[]).find((c: any) => c?.id === chainId) as Chain;
+            }
             if (!chain)
                 throw new Error(
                     `Chain ID ${chainId} not found in viem chains. Use ChainKitRegistry.for(customChain) for custom chains.`
                 );
         } else {
             // Find chain by name
-            chain = (chains as any)[chainIdOrNameOrChain];
+            chain = (chains as any)[chainIdOrNameOrChain] || (localChains as any)[chainIdOrNameOrChain];
             if (!chain) {
-                const available = Object.keys(chains)
+                const available = Array.from(new Set([...Object.keys(chains), ...Object.keys(localChains)]))
                     .filter((k) => !k.includes('__'))
                     .slice(0, 20)
                     .join(', ');

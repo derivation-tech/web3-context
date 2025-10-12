@@ -23,6 +23,8 @@ module.exports = [
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-unused-vars': 'off',
             '@typescript-eslint/no-require-imports': 'off',
+            // Enforce no trailing spaces - coding practice rule
+            'no-trailing-spaces': 'error',
         },
     },
     // prettier should be the last config because it disables all formatting rules

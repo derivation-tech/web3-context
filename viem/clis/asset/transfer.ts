@@ -1,7 +1,7 @@
 import { createPublicClient, createWalletClient, http, parseEther } from 'viem';
 import type { Address } from 'viem';
-import { ChainKitRegistry, ERC20 } from '../../index';
-import { createAccountFromSpec } from './utils';
+import { ChainKitRegistry, ERC20, getAccount } from '../../index';
+import { getRpcUrl } from './utils';
 
 /**
  * Transfer command handler
@@ -15,9 +15,10 @@ export async function handleTransfer(args: string[], options: any) {
 
     // Get chain context
     const kit = ChainKitRegistry.for(network);
+    const rpcUrl = getRpcUrl(network);
     const publicClient = createPublicClient({
         chain: kit.chain,
-        transport: http(),
+        transport: http(rpcUrl),
     });
 
     // Parse from addresses (support mnemonic format)
@@ -26,9 +27,9 @@ export async function handleTransfer(args: string[], options: any) {
 
     for (const fromSpec of from) {
         try {
-            const { address, account } = createAccountFromSpec(fromSpec);
-            fromAddresses.push(address);
+            const { account } = getAccount(kit, fromSpec);
             accounts.push(account);
+            fromAddresses.push(account.address as Address);
         } catch (error) {
             console.error(`❌ ${error}`);
             return;

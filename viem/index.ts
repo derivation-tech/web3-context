@@ -8,9 +8,11 @@ export { createDefaultParser } from './parsers/default';
 export { LoggerFactory, ConsoleLogger, LogLevel, type BaseLogger } from './utils/logger';
 export { createERC20Parser } from './parsers/erc20';
 export { createWETHParser } from './parsers/weth';
-export { sendTxWithLog, sendTxSilent, batchSendTxWithLog, batchSendTxSilent, type TxRequest } from './utils/tx-helpers';
+export { sendTxWithLog, sendTxSilent, batchSendTxWithLog, batchSendTxSilent, type TxRequest } from './utils/tx';
+export { getAccount } from './utils/account';
 export * as ERC20 from './contracts/erc20';
 export * as WETH from './contracts/weth';
+export * as Multicall from './contracts/multicall';
 
 // Type exports
 export type { Erc20TokenInfo, ContractParser } from './types';
