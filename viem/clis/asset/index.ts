@@ -50,7 +50,7 @@ const main = async () => {
             '--to <signerIdPattern>',
             'Comma-separated signerIdPattern for recipients (signerId | signerIdRange | mixed). Examples: "neo:1", "bob:0-5,alice:0"'
         )
-        .requiredOption('--amounts <amounts>', 'Comma-separated list of amounts')
+        .requiredOption('--amount <amount>', 'Single amount or comma-separated list of amounts')
         .option('--batch', 'Use batch processing for faster execution (ERC20 only)', false)
         .action(handleTransfer);
 

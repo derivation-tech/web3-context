@@ -6,7 +6,7 @@
 
 import type { PublicClient, WalletClient, Address, TransactionReceipt } from 'viem';
 import type { ChainKit } from '../chain-kit';
-import { sendTxWithLog, sendTxSilent } from '../utils/tx';
+import { sendTxWithLog, sendTxSilent } from '../index';
 import { ERC20_ABI } from '../abis';
 
 /**
