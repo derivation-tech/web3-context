@@ -27,13 +27,13 @@ const main = async () => {
         )
         .requiredOption('-n, --network <network>', 'Network name (e.g., base, ethereum, polygon)')
         .requiredOption(
-            '--address <signerIdPattern>',
+            '--id <signerIdPattern>',
             'Comma-separated signerIdPattern (signerId | signerIdRange | mixed). Examples: "neo:0", "neo" (alias of neo:0), "neo:0-10", "neo:0-10,bob:0-100"'
         )
         .option('--batch-size <size>', 'Number of addresses to query per batch (default: 500)', '500')
         .action((args, options) => {
             const batchSize = parseInt(options.batchSize) || 500;
-            handleBalance(args, { ...options, addressPattern: options.address, batchSize });
+            handleBalance(args, { ...options, addressPattern: options.id, batchSize });
         });
 
     // Transfer command
@@ -58,7 +58,7 @@ const main = async () => {
     program
         .command('generate-address')
         .description('Generate signerId → address mappings and write to a file inside ADDRESS_PATH')
-        .requiredOption('--address <signerIdPattern>', 'Comma-separated signerIdPattern (supports ranges)')
+        .requiredOption('--id <signerIdPattern>', 'Comma-separated signerIdPattern (supports ranges)')
         .requiredOption('--file <filename>', 'Output filename (written under ADDRESS_PATH)')
         .action(handleGenerateAddress);
 

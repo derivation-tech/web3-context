@@ -7,7 +7,7 @@ import { LoggerFactory } from '../../index';
 import { AddressBook } from '../../utils/address-book';
 
 export async function handleGenerateAddress(options: any) {
-    const { address: signerIdPattern, file } = options;
+    const { id: signerIdPattern, file } = options;
 
     const logger = LoggerFactory.getLogger('Generate::Address') as any;
     logger.setTimestamp(true);
