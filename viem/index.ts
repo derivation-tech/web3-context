@@ -1,14 +1,14 @@
 // Main exports
 export { ChainKit } from './chain-kit';
 export { ChainKitRegistry } from './chain-kit-registry';
-export { AddressBook } from './address-book';
+export { AddressBook } from './utils/address-book';
 export { WRAPPED_NATIVE_TOKENS, getWrappedNativeToken } from './tokens/wrapped';
 export { COMMON_ERC20_TOKENS, getCommonErc20Tokens } from './tokens/erc20';
 export { createDefaultParser } from './parsers/default';
-export { LoggerFactory, ConsoleLogger, LogLevel, type BaseLogger } from './logger';
+export { LoggerFactory, ConsoleLogger, LogLevel, type BaseLogger } from './utils/logger';
 export { createERC20Parser } from './parsers/erc20';
 export { createWETHParser } from './parsers/weth';
-export { sendTxWithLog, sendTxSilent, batchSendTxWithLog, batchSendTxSilent, type TxRequest } from './tx-helpers';
+export { sendTxWithLog, sendTxSilent, batchSendTxWithLog, batchSendTxSilent, type TxRequest } from './utils/tx-helpers';
 export * as ERC20 from './contracts/erc20';
 export * as WETH from './contracts/weth';
 

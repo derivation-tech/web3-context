@@ -1,7 +1,7 @@
 import type { Address, Chain } from 'viem';
 import { formatUnits, parseUnits, getAddress } from 'viem';
-import { AddressBook } from './address-book';
-import { LoggerFactory } from './logger';
+import { AddressBook } from './utils/address-book';
+import { LoggerFactory } from './utils/logger';
 import { createERC20Parser } from './parsers/erc20';
 import { createWETHParser } from './parsers/weth';
 import { createDefaultParser } from './parsers/default';
