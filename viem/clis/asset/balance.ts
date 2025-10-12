@@ -2,12 +2,21 @@ import { createPublicClient, http, formatEther } from 'viem';
 import type { Address } from 'viem';
 import { ChainKitRegistry, ERC20 } from '../../index';
 
+// Polyfill fetch and Request for Node.js
+import fetch, { Request } from 'node-fetch';
+if (typeof globalThis.fetch === 'undefined') {
+    globalThis.fetch = fetch as any;
+}
+if (typeof globalThis.Request === 'undefined') {
+    globalThis.Request = Request as any;
+}
+
 /**
  * Balance command handler
  */
 
-export async function handleBalance(args: string[], options: any) {
-    const [tokenSymbols] = args;
+export async function handleBalance(args: string, options: any) {
+    const tokenSymbols = args;
     const { network, address } = options;
 
     console.log(`\n💰 Balance Query on ${network.toUpperCase()}\n`);
