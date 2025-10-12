@@ -72,6 +72,37 @@ export function getAddressFromMnemonic(name: string, index: number): Address {
 }
 
 /**
+ * Extract address name from mnemonic-derived address
+ * This is a reverse lookup to determine which mnemonic name generated this address
+ */
+export function extractAddressName(address: Address): string | null {
+    // Try common mnemonic names and indices to find a match
+    const commonNames = ['neo', 'alice', 'bob', 'charlie', 'david'];
+    
+    for (const name of commonNames) {
+        const mnemonicKey = `${name.toUpperCase()}_MNEMONIC`;
+        const mnemonic = process.env[mnemonicKey];
+        
+        if (mnemonic) {
+            // Check indices 0-1000 to find a match
+            for (let i = 0; i <= 1000; i++) {
+                try {
+                    const derivedAddress = getAddressFromMnemonic(name, i);
+                    if (derivedAddress.toLowerCase() === address.toLowerCase()) {
+                        return `${name}:${i}`;
+                    }
+                } catch {
+                    // Skip if mnemonic is invalid
+                    break;
+                }
+            }
+        }
+    }
+    
+    return null;
+}
+
+/**
  * Create account from mnemonic or private key
  */
 export function createAccountFromSpec(fromSpec: string): { address: Address; account: any } {

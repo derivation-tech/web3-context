@@ -2,6 +2,7 @@ import { createPublicClient, http, formatEther } from 'viem';
 import type { Address } from 'viem';
 import { ChainKitRegistry, ERC20 } from '../../index';
 import { ERC20_ABI } from '../../abis';
+import { extractAddressName } from './utils';
 
 // Polyfill fetch and Request for Node.js
 import fetch, { Request } from 'node-fetch';
@@ -28,6 +29,15 @@ export async function handleBalance(args: string, options: any) {
         chain: kit.chain,
         transport: http(),
     });
+
+    // Register all addresses in the address book
+    for (const addr of address) {
+        // Extract name from address if it's a mnemonic-derived address
+        const name = extractAddressName(addr);
+        if (name) {
+            kit.registerAddressName(addr, name);
+        }
+    }
 
     // Parse token symbols/addresses
     const tokens = tokenSymbols.split(',').map((t) => t.trim());
