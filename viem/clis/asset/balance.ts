@@ -41,9 +41,7 @@ export async function handleBalance(args: string, options: any) {
                 const balance = await publicClient.getBalance({ address: addr });
                 const formatted = formatEther(balance);
                 const name = kit.getAddressName(addr);
-                console.log(
-                    `  ${name !== 'UNKNOWN' ? `[${name}]` : ''}${addr}: ${formatted} ${kit.chain.nativeCurrency.symbol}`
-                );
+                console.log(`  [${name}]${addr}: ${formatted} ${kit.chain.nativeCurrency.symbol}`);
             }
         } else if (token === 'wrappedNative' || token === 'weth') {
             // Wrapped native token balance
@@ -58,7 +56,7 @@ export async function handleBalance(args: string, options: any) {
                 const balance = await ERC20.balanceOf(publicClient, wrappedToken.address, addr);
                 const formatted = kit.formatErc20Amount(balance, wrappedToken.address);
                 const name = kit.getAddressName(addr);
-                console.log(`  ${name !== 'UNKNOWN' ? `[${name}]` : ''}${addr}: ${formatted}`);
+                console.log(`  [${name}]${addr}: ${formatted}`);
             }
         } else {
             // ERC20 token balance - check if it's an address or symbol
@@ -103,9 +101,10 @@ export async function handleBalance(args: string, options: any) {
                         const balance = result.result as bigint;
                         const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
                         const name = kit.getAddressName(addr);
-                        console.log(`  ${name !== 'UNKNOWN' ? `[${name}]` : ''}${addr}: ${formatted}`);
+                        console.log(`  [${name}]${addr}: ${formatted}`);
                     } else {
-                        console.log(`  ${addr}: Error - ${result.error?.message || 'Unknown error'}`);
+                        const name = kit.getAddressName(addr);
+                        console.log(`  [${name}]${addr}: Error - ${result.error?.message || 'Unknown error'}`);
                     }
                 }
             } catch (error: any) {
@@ -116,12 +115,13 @@ export async function handleBalance(args: string, options: any) {
                         const balance = await ERC20.balanceOf(publicClient, tokenInfo.address, addr);
                         const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
                         const name = kit.getAddressName(addr);
-                        console.log(`  ${name !== 'UNKNOWN' ? `[${name}]` : ''}${addr}: ${formatted}`);
+                        console.log(`  [${name}]${addr}: ${formatted}`);
                         
                         // Add delay to avoid rate limits
                         await new Promise(resolve => setTimeout(resolve, 100));
                     } catch (err: any) {
-                        console.log(`  ${addr}: Error - ${err.message}`);
+                        const name = kit.getAddressName(addr);
+                        console.log(`  [${name}]${addr}: Error - ${err.message}`);
                     }
                 }
             }
