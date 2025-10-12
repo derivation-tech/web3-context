@@ -1,6 +1,7 @@
 import { createPublicClient, http, formatEther } from 'viem';
 import type { Address } from 'viem';
 import { ChainKitRegistry, ERC20 } from '../../index';
+import { ERC20_ABI } from '../../abis';
 
 // Polyfill fetch and Request for Node.js
 import fetch, { Request } from 'node-fetch';
@@ -82,11 +83,47 @@ export async function handleBalance(args: string, options: any) {
             }
 
             console.log(`📊 ${tokenInfo.symbol} Balances:`);
-            for (const addr of address) {
-                const balance = await ERC20.balanceOf(publicClient, tokenInfo.address, addr);
-                const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
-                const name = kit.getAddressName(addr);
-                console.log(`  ${name !== 'UNKNOWN' ? `[${name}]` : ''}${addr}: ${formatted}`);
+            
+            // Use multicall to batch balance queries and avoid rate limits
+            try {
+                const multicallResults = await publicClient.multicall({
+                    contracts: address.map(addr => ({
+                        address: tokenInfo.address,
+                        abi: ERC20_ABI,
+                        functionName: 'balanceOf',
+                        args: [addr],
+                    })),
+                });
+
+                for (let i = 0; i < address.length; i++) {
+                    const addr = address[i];
+                    const result = multicallResults[i];
+                    
+                    if (result.status === 'success') {
+                        const balance = result.result as bigint;
+                        const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
+                        const name = kit.getAddressName(addr);
+                        console.log(`  ${name !== 'UNKNOWN' ? `[${name}]` : ''}${addr}: ${formatted}`);
+                    } else {
+                        console.log(`  ${addr}: Error - ${result.error?.message || 'Unknown error'}`);
+                    }
+                }
+            } catch (error: any) {
+                console.log(`  Error querying ${tokenInfo.symbol} balances: ${error.message}`);
+                // Fallback to individual queries with delay
+                for (const addr of address) {
+                    try {
+                        const balance = await ERC20.balanceOf(publicClient, tokenInfo.address, addr);
+                        const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
+                        const name = kit.getAddressName(addr);
+                        console.log(`  ${name !== 'UNKNOWN' ? `[${name}]` : ''}${addr}: ${formatted}`);
+                        
+                        // Add delay to avoid rate limits
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                    } catch (err: any) {
+                        console.log(`  ${addr}: Error - ${err.message}`);
+                    }
+                }
             }
         }
 
