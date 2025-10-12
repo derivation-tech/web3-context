@@ -10,7 +10,7 @@
 import { createPublicClient, createWalletClient, http, parseAbi, decodeEventLog } from 'viem';
 import { base } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
-import { ChainKitRegistry, type Address } from './index.js';
+import { ChainKitRegistry, type Address } from '../index';
 
 // ==========================================
 // SETUP: Initialize Base chain registry (once, anywhere)
@@ -122,8 +122,9 @@ async function example2_sendTxWithParsing() {
             });
 
             // Use parser to format (includes decimals!)
+            if (!decoded.eventName) continue;
             const formatted = await parser.parseEvent!({
-                eventName: decoded.eventName,
+                eventName: decoded.eventName as string,
                 args: decoded.args as any,
             });
 
@@ -141,11 +142,11 @@ async function example3_crossFileAccess() {
 
     // File 1: balance.ts
     const file1Access = ChainKitRegistry.for(8453); // By ID
-    console.log('File 1 sees USDC?', file1Access.getToken('usdc')?.symbol);
+    console.log('File 1 sees USDC?', file1Access.getErc20TokenInfo('usdc')?.symbol);
 
     // File 2: transfer.ts (different file, same singleton!)
     const file2Access = ChainKitRegistry.for('base'); // By name
-    console.log('File 2 sees USDC?', file2Access.getToken('usdc')?.symbol);
+    console.log('File 2 sees USDC?', file2Access.getErc20TokenInfo('usdc')?.symbol);
 
     // Prove they're the same instance
     console.log('Same instance?', file1Access === file2Access); // true!
@@ -161,6 +162,7 @@ async function example4_multipleChains() {
     const baseCtx = ChainKitRegistry.for('base');
     baseCtx.registerErc20Token({
         symbol: 'USDC',
+        name: 'USD Coin',
         address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' as Address,
         decimals: 6,
     });
@@ -169,6 +171,7 @@ async function example4_multipleChains() {
     const opCtx = ChainKitRegistry.for('optimism');
     opCtx.registerErc20Token({
         symbol: 'USDC',
+        name: 'USD Coin',
         address: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85' as Address,
         decimals: 6,
     });
@@ -179,7 +182,7 @@ async function example4_multipleChains() {
 
     console.log(
         '\nAll initialized chains:',
-        ChainKitRegistry.getAll().map((c) => c.chain.name)
+        ChainKitRegistry.getAll().map((c: any) => c.chain.name)
     );
 }
 

@@ -6,9 +6,9 @@
 import 'dotenv/config';
 import { createPublicClient, createWalletClient, http } from 'viem';
 import { mnemonicToAccount } from 'viem/accounts';
-import { ChainKitRegistry } from '../index.js';
-import { abctest } from '../chains/abctest.js';
-import * as ERC20 from '../contracts/erc20.js';
+import { ChainKitRegistry } from '../index';
+import { abctest } from '../chains/abctest';
+import * as ERC20 from '../contracts/erc20';
 
 // Removed logger - using console.log instead
 
@@ -33,8 +33,8 @@ async function transferUSDM() {
     // STEP 2: Get accounts from NEO_MNEMONIC
     // ==========================================
     if (!process.env.NEO_MNEMONIC) {
-        logger.error('❌ Set NEO_MNEMONIC environment variable');
-        console.log('Example: NEO_MNEMONIC="word word word..." npx tsx example-abc-transfer.ts\n');
+        console.error('❌ Set NEO_MNEMONIC environment variable');
+        console.log('Example: NEO_MNEMONIC="word word word..." npx tsx abc-transfer.ts\n');
         return;
     }
 
@@ -101,6 +101,6 @@ async function transferUSDM() {
 }
 
 transferUSDM().catch((error) => {
-    logger.error('❌ Error:', error.shortMessage || error.message);
+    console.error('❌ Error:', (error as any).shortMessage || (error as any).message);
     process.exit(1);
 });

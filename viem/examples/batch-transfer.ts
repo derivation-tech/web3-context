@@ -6,8 +6,8 @@
 import 'dotenv/config';
 import { createPublicClient, createWalletClient, http } from 'viem';
 import { mnemonicToAccount } from 'viem/accounts';
-import { ChainKitRegistry, batchSendTxWithLog, LoggerFactory, LogLevel, type Address } from '../index.js';
-import { abctest } from '../chains/abctest.js';
+import { ChainKitRegistry, batchSendTxWithLog, LoggerFactory, LogLevel, type Address } from '../index';
+import { abctest } from '../chains/abctest';
 
 const logger = LoggerFactory.getLogger('Batch-Transfer', LogLevel.Info);
 
@@ -96,7 +96,7 @@ async function batchTransfer() {
     logger.info('');
     logger.info('📊 Summary:');
     logger.info(`  Total transfers: ${receipts.length}`);
-    logger.info(`  Total gas used: ${receipts.reduce((sum, r) => sum + r.gasUsed, 0n).toString()}`);
+    logger.info(`  Total gas used: ${receipts.reduce((sum: bigint, r: any) => sum + (r.gasUsed as bigint), 0n).toString()}`);
     logger.info(`  Duration: ${duration}ms`);
     logger.info(`  Average: ${(duration / receipts.length).toFixed(0)}ms per tx`);
     logger.info('');
