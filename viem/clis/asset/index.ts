@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { parseAmounts } from './utils';
-import { handleBalance } from './balance';
-import { handleTransfer } from './transfer';
+// no extra parsers needed from utils
+import { handleBalance } from './handle-balance';
+import { handleTransfer } from './handle-transfer';
+import { handleGenerateAddress } from './handle-generate-address';
 import 'dotenv/config';
 
 /**
@@ -49,9 +50,17 @@ const main = async () => {
             '--to <signerIdPattern>',
             'Comma-separated signerIdPattern for recipients (signerId | signerIdRange | mixed). Examples: "neo:1", "bob:0-5,alice:0"'
         )
-        .requiredOption('--amounts <amounts>', 'Comma-separated list of amounts', parseAmounts)
+        .requiredOption('--amounts <amounts>', 'Comma-separated list of amounts')
         .option('--batch', 'Use batch processing for faster execution (ERC20 only)', false)
         .action(handleTransfer);
+
+    // Generate address file command
+    program
+        .command('generate-address')
+        .description('Generate signerId → address mappings and write to a file inside ADDRESS_PATH')
+        .requiredOption('--address <signerIdPattern>', 'Comma-separated signerIdPattern (supports ranges)')
+        .requiredOption('--file <filename>', 'Output filename (written under ADDRESS_PATH)')
+        .action(handleGenerateAddress);
 
     await program.parseAsync(process.argv);
 };

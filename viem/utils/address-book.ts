@@ -23,6 +23,30 @@ export class AddressBook {
         const checksummed = getAddress(address);
         const lowerName = name.toLowerCase();
 
+        // If address already has a name
+        const existingName = this.addressToName.get(checksummed);
+        if (existingName) {
+            if (existingName.toLowerCase() !== lowerName) {
+                throw new Error(
+                    `Address ${checksummed} already bound to name '${existingName}', cannot rebind to '${name}'.`
+                );
+            }
+            // Same binding, nothing to do
+            return;
+        }
+
+        // If name already bound to a different address
+        const existingAddress = this.nameToAddress.get(lowerName);
+        if (existingAddress) {
+            if (getAddress(existingAddress) !== checksummed) {
+                throw new Error(
+                    `Name '${name}' already bound to address ${existingAddress}, cannot rebind to ${checksummed}.`
+                );
+            }
+            // Same binding, nothing to do
+            return;
+        }
+
         this.addressToName.set(checksummed, name);
         this.nameToAddress.set(lowerName, checksummed);
     }

@@ -1,25 +1,33 @@
 import { createPublicClient, createWalletClient, http, parseEther } from 'viem';
 import type { Address } from 'viem';
-import { ChainKitRegistry, ERC20, getAccount } from '../../index';
-import { getRpcUrl } from './utils';
-
-/**
- * Transfer command handler
- */
+import { ChainKitRegistry, ERC20, LoggerFactory, getAccount } from '../../index';
+import { getRpcUrl, readSignerAddressFiles } from './utils';
 
 export async function handleTransfer(args: string[], options: any) {
     const [tokenSymbol] = args;
     const { network, from, to, amounts, batch } = options;
 
-    console.log(`\n💸 Transfer on ${network.toUpperCase()}\n`);
+    const logger = LoggerFactory.getLogger(`${network.charAt(0).toUpperCase() + network.slice(1)}::Transfer`) as any;
+    logger.setTimestamp(true);
+    logger.info(`💸 Transfer on ${network.toUpperCase()}`);
 
-    // Get chain context
     const kit = ChainKitRegistry.for(network);
     const rpcUrl = getRpcUrl(network);
     const publicClient = createPublicClient({
         chain: kit.chain,
         transport: http(rpcUrl),
     });
+
+    // Preload address book from files/env (ADDRESS_PATH); optional
+    try {
+        const entries = readSignerAddressFiles();
+        for (const { name, address } of entries) {
+            kit.registerAddressName(address, name);
+        }
+        if (entries.length > 0) {
+            logger.info(`📚 Loaded ${entries.length} address mappings from files`);
+        }
+    } catch {}
 
     // Parse from addresses (support mnemonic format)
     const fromAddresses: Address[] = [];
@@ -31,21 +39,21 @@ export async function handleTransfer(args: string[], options: any) {
             accounts.push(account);
             fromAddresses.push(account.address as Address);
         } catch (error) {
-            console.error(`❌ ${error}`);
+            logger.error(`❌ ${error}`);
             return;
         }
     }
 
     // Validate to addresses and amounts
     if (to.length !== amounts.length) {
-        console.error('❌ Number of recipients must match number of amounts');
+        logger.error('❌ Number of recipients must match number of amounts');
         return;
     }
 
     try {
         if (tokenSymbol === 'native' || tokenSymbol === 'eth') {
             // Native token transfers
-            console.log(`📦 Processing ${to.length} native token transfers...`);
+            logger.info(`📦 Processing ${to.length} native token transfers...`);
 
             for (let i = 0; i < to.length; i++) {
                 const toAddress = to[i];
@@ -69,25 +77,25 @@ export async function handleTransfer(args: string[], options: any) {
                     value: amountWei,
                 });
 
-                console.log(`  ${i + 1}/${to.length} sent: ${hash}`);
-                console.log(`     From: [${kit.getAddressName(fromAddress)}]${fromAddress}`);
-                console.log(`     To: [${kit.getAddressName(toAddress)}]${toAddress}`);
-                console.log(`     Amount: ${amountValue} ${kit.chain.nativeCurrency.symbol}`);
+                logger.info(`  ${i + 1}/${to.length} sent: ${hash}`);
+                logger.info(`     From: [${kit.getAddressName(fromAddress)}]${fromAddress}`);
+                logger.info(`     To: [${kit.getAddressName(toAddress)}]${toAddress}`);
+                logger.info(`     Amount: ${amountValue} ${kit.chain.nativeCurrency.symbol}`);
 
                 const receipt = await publicClient.waitForTransactionReceipt({ hash });
-                console.log(`  ${i + 1}/${to.length} confirmed in block ${receipt.blockNumber}`);
+                logger.info(`  ${i + 1}/${to.length} confirmed in block ${receipt.blockNumber}`);
             }
         } else {
             // ERC20 token transfers
             const tokenInfo = kit.getErc20TokenInfo(tokenSymbol);
             if (!tokenInfo) {
-                console.error(`❌ Token ${tokenSymbol} not found`);
+                logger.error(`❌ Token ${tokenSymbol} not found`);
                 return;
             }
 
             if (batch) {
                 // Batch processing for ERC20 tokens
-                console.log(`📦 Batch processing ${to.length} ${tokenInfo.symbol} transfers...`);
+                logger.info(`📦 Batch processing ${to.length} ${tokenInfo.symbol} transfers...`);
 
                 // Group transactions by from address for batch processing
                 const txGroups: { [key: string]: any[] } = {};
@@ -121,27 +129,26 @@ export async function handleTransfer(args: string[], options: any) {
                         transport: http(),
                     });
 
-                    console.log(
+                    logger.info(
                         `  Processing ${txs.length} transfers from [${kit.getAddressName(fromAddress as Address)}]${fromAddress}`
                     );
 
                     const receipts = await ERC20.batchSendTxWithLog(publicClient, [walletClient], kit, txs);
 
-                    console.log(`  ✅ ${receipts.length} transfers completed from ${fromAddress}`);
+                    logger.info(`  ✅ ${receipts.length} transfers completed from ${fromAddress}`);
                     for (let i = 0; i < receipts.length; i++) {
-                        console.log(`    ${i + 1}/${receipts.length}: ${receipts[i].transactionHash}`);
+                        logger.info(`    ${i + 1}/${receipts.length}: ${receipts[i].transactionHash}`);
                     }
                 }
             } else {
                 // Sequential processing for ERC20 tokens
-                console.log(`📦 Sequential processing ${to.length} ${tokenInfo.symbol} transfers...`);
+                logger.info(`📦 Sequential processing ${to.length} ${tokenInfo.symbol} transfers...`);
 
                 for (let i = 0; i < to.length; i++) {
                     const toAddress = to[i];
                     const amountValue = amounts[i];
                     const amountWei = kit.parseErc20Amount(amountValue, tokenInfo.address);
 
-                    // Cycle through from addresses if there are more to addresses
                     const fromIndex = i % fromAddresses.length;
                     const fromAddress = fromAddresses[fromIndex];
                     const account = accounts[fromIndex];
@@ -161,16 +168,18 @@ export async function handleTransfer(args: string[], options: any) {
                         amountWei
                     );
 
-                    console.log(`  ${i + 1}/${to.length} completed: ${receipt.transactionHash}`);
-                    console.log(`     From: [${kit.getAddressName(fromAddress)}]${fromAddress}`);
-                    console.log(`     To: [${kit.getAddressName(toAddress)}]${toAddress}`);
-                    console.log(`     Amount: ${amountValue} ${tokenInfo.symbol}`);
+                    logger.info(`  ${i + 1}/${to.length} completed: ${receipt.transactionHash}`);
+                    logger.info(`     From: [${kit.getAddressName(fromAddress)}]${fromAddress}`);
+                    logger.info(`     To: [${kit.getAddressName(toAddress)}]${toAddress}`);
+                    logger.info(`     Amount: ${amountValue} ${tokenInfo.symbol}`);
                 }
             }
         }
     } catch (error) {
-        console.error('❌ Transfer failed:', error);
+        logger.error('❌ Transfer failed:', error);
     }
 
-    console.log('');
+    logger.info('');
 }
+
+
