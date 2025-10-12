@@ -81,7 +81,7 @@ export async function handleBalance(args: string, options: any) {
             }
 
             console.log(`📊 ${tokenInfo.symbol} Balances:`);
-            
+
             // Use multicall to batch balance queries and avoid rate limits
             try {
                 const multicallResults = await publicClient.multicall({
@@ -96,7 +96,7 @@ export async function handleBalance(args: string, options: any) {
                 for (let i = 0; i < address.length; i++) {
                     const addr = address[i];
                     const result = multicallResults[i];
-                    
+
                     if (result.status === 'success') {
                         const balance = result.result as bigint;
                         const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
@@ -116,7 +116,7 @@ export async function handleBalance(args: string, options: any) {
                         const formatted = kit.formatErc20Amount(balance, tokenInfo.address);
                         const name = kit.getAddressName(addr);
                         console.log(`  [${name}]${addr}: ${formatted}`);
-                        
+
                         // Add delay to avoid rate limits
                         await new Promise(resolve => setTimeout(resolve, 100));
                     } catch (err: any) {
