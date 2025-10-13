@@ -1,7 +1,6 @@
 // Main exports
 export { ChainKit } from './chain-kit';
 export { ChainKitRegistry } from './chain-kit-registry';
-export { AddressBook } from './utils/address-book';
 export { WRAPPED_NATIVE_TOKENS, getWrappedNativeToken } from './tokens/wrapped';
 export { COMMON_ERC20_TOKENS, getCommonErc20Tokens } from './tokens/erc20';
 export { createDefaultParser } from './parsers/default';
