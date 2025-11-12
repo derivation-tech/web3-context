@@ -27,13 +27,14 @@ export enum CHAIN_ID {
     BLAST = 81457,
     MANTA = 169,
     MONADTESTNET = 10143,
+    MONAD = 143,
     GNOSIS = 100,
     AVALANCHE = 43114,
     BASESEPOLIA = 84532,
     GELATO = 420001846,
     CONDUIT = 19908,
     ALTLAYER = 112245,
-    ABC = 20250903
+    ABC = 20250903,
 }
 
 export const PREFIX = '├─';

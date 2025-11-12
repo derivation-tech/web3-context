@@ -1,6 +1,6 @@
 {
     "name": "@derivation-tech/tx-plugin",
-    "version": "1.0.9-appchain.7",
+    "version": "1.0.9-monad.1",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
