@@ -1,5 +1,20 @@
 # @derivation-tech/context
 
+## 1.0.10
+
+### Patch Changes
+
+- bump version to align version number
+- Updated dependencies
+    - @derivation-tech/contracts@1.0.10
+
+## 1.0.9
+
+### Patch Changes
+
+- Support Moand private mainnet
+    - @derivation-tech/contracts@1.0.9
+
 ## 1.0.8
 
 ### Patch Changes
