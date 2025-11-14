@@ -1,0 +1,31 @@
+{
+    "chainName": "Altlayer",
+    "chainId": 112245,
+    "chainAlias": ["altlayer"],
+    "defaultTxType": "eip1559",
+    "nativeToken": {
+        "name": "MockF",
+        "address": "",
+        "symbol": "MOCKF",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped MockF",
+        "address": "0x8FaD297892A61ED2c3D42DDe4D83016f39b494ab",
+        "symbol": "WMOCKF",
+        "decimals": 18
+    },
+    "explorer": "https://synfutures-altlayer-testnet-explorer.alt.technology",
+    "tokenAssistant": "0x10C67E3ADa87e5ff94d03434f78744d8AA70D6a7",
+    "multicall3": "0x2373E23831Ef3964fd12C97D9B7643c73313f161",
+    "erc20": [
+        {
+            "name": "USD Mock Token",
+            "address": "0x8da593B1084727DD82212A0b812415851F29cdec",
+            "symbol": "USDM",
+            "decimals": 6
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

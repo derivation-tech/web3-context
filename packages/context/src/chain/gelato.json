@@ -1,0 +1,31 @@
+{
+    "chainName": "Gelato",
+    "chainId": 420001846,
+    "chainAlias": ["gelato"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "MockF",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "MOCKF",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped MockF",
+        "address": "0x9c0298AfB9b1408B2E4236475F417068911e3e96",
+        "symbol": "WMOCKF",
+        "decimals": 18
+    },
+    "explorer": "https://synfutures-testnet.cloud.blockscout.com/",
+    "tokenAssistant": "0xA5E501c378adA03268aF9FD20D2Ed93000EdcAB8",
+    "multicall3": "0x69775e2767373c86c6A0cF5D30D9EE424De7c2a5",
+    "erc20": [
+        {
+            "name": "USD Mock Token",
+            "address": "0x8da593B1084727DD82212A0b812415851F29cdec",
+            "symbol": "USDM",
+            "decimals": 6
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

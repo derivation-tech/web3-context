@@ -1,5 +1,13 @@
 # @derivation-tech/contracts
 
+## 1.0.10
+
+### Patch Changes
+
+- bump version to align version number
+
+## 1.0.9
+
 ## 1.0.8
 
 ### Patch Changes

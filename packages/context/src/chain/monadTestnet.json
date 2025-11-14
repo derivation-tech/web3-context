@@ -20,27 +20,9 @@
     "multicall3": "0x4425013195c6e1C13cAE2Df50bd84526F3E227AB",
     "erc20": [
         {
-            "name": "Molandak",
-            "address": "0x0F0BDEbF0F83cD1EE3974779Bcb7315f9808c714",
-            "symbol": "DAK",
-            "decimals": 18
-        },
-        {
-            "name": "Moyaki",
-            "address": "0xfe140e1dCe99Be9F4F15d657CD9b7BF622270C50",
-            "symbol": "YAKI",
-            "decimals": 18
-        },
-        {
-            "name": "Chog",
-            "address": "0xe0590015a873bf326bd645c3e1266d4db41c4e6b",
-            "symbol": "CHOG",
-            "decimals": 18
-        },
-        {
-            "name": "USD Coin",
-            "address": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
-            "symbol": "USDC",
+            "name": "USDM",
+            "address": "0x8da593B1084727DD82212A0b812415851F29cdec",
+            "symbol": "USDM",
             "decimals": 6
         }
     ],

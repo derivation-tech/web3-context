@@ -1,0 +1,31 @@
+{
+    "chainName": "ABC",
+    "chainId": 20250903,
+    "chainAlias": ["abc", "Abc"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "MockF",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "MOCKF",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped MockF",
+        "address": "0xd7d13F2D4EBC0E43fa65bB16e831eB2068a2f4ae",
+        "symbol": "WMOCKF",
+        "decimals": 18
+    },
+    "explorer": "https://synfutures-abc-testnet.cloud.blockscout.com/",
+    "tokenAssistant": "0x6be2B89ea3C7a6dC3CAa8Db17d5d9991eBb7063a",
+    "multicall3": "0x5AC0088a2614EFbAF2f4B01130e6F8BbA66f13fD",
+    "erc20": [
+        {
+            "name": "USD Mock Token",
+            "address": "0x8da593B1084727DD82212A0b812415851F29cdec",
+            "symbol": "USDM",
+            "decimals": 6
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

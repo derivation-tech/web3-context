@@ -133,4 +133,5 @@ dist
 .idea
 .nx
 
+.vscode/
 .DS_Store
