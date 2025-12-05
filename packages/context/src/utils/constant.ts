@@ -35,6 +35,7 @@ export enum CHAIN_ID {
     CONDUIT = 19908,
     ALTLAYER = 112245,
     ABC = 20250903,
+    SOV = 4321,
 }
 
 export const PREFIX = '├─';

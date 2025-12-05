@@ -1,0 +1,31 @@
+{
+    "chainName": "sov",
+    "chainId": 4321,
+    "chainAlias": ["SOV", "Sov"],
+    "defaultTxType": "legacy",
+    "nativeToken": {
+        "name": "Ether",
+        "address": "0x0000000000000000000000000000000000000000",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "wrappedNativeToken": {
+        "name": "Wrapped Ether",
+        "address": "0x1826c56DF1Eab235ced34A3e00bFe3CD1AC0e764",
+        "symbol": "WETH",
+        "decimals": 18
+    },
+    "explorer": "",
+    "tokenAssistant": "0x38E608acBa7423Bd3438Bea1183939f566c830Af",
+    "multicall3": "0x3075bD0B2f217013B0903B9a042E1C7c1909Bec6",
+    "erc20": [
+        {
+            "name": "Mock USD",
+            "address": "0x5B2b0bcf8b7471d2C6541C9aCF35F6cD05FE762b",
+            "symbol": "USDM",
+            "decimals": 6
+        }
+    ],
+    "erc721": [],
+    "erc1155": []
+}

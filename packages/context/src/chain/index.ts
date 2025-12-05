@@ -30,6 +30,7 @@ import ConduitInfo from './conduit.json';
 import AltlayerInfo from './altlayer.json';
 import ABCInfo from './abc.json';
 import MonadInfo from './monad.json';
+import SovInfo from './sov.json';
 import { ContextCoreError } from '../error';
 
 export function getChainInfo(nameOrId: string | number): ChainInfo {
@@ -65,6 +66,7 @@ export function getChainInfo(nameOrId: string | number): ChainInfo {
         AltlayerInfo,
         ABCInfo,
         MonadInfo,
+        SovInfo,
     ];
     for (const info of allInfos) {
         if (typeof nameOrId === 'number' && info.chainId === nameOrId) {
