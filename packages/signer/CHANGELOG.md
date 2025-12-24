@@ -1,5 +1,14 @@
 # @derivation-tech/signer
 
+## 1.0.11
+
+### Patch Changes
+
+- Update monadTestnet contract addresses due to monadTestnet reset
+- Updated dependencies
+    - @derivation-tech/context@1.0.11
+    - @derivation-tech/contracts@1.0.11
+
 ## 1.0.10
 
 ### Patch Changes
