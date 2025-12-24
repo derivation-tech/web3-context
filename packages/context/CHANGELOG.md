@@ -1,5 +1,13 @@
 # @derivation-tech/context
 
+## 1.0.12
+
+### Patch Changes
+
+- Update addresses
+- Updated dependencies
+    - @derivation-tech/contracts@1.0.12
+
 ## 1.0.11
 
 ### Patch Changes
