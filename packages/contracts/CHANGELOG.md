@@ -1,5 +1,17 @@
 # @derivation-tech/contracts
 
+## 1.0.12
+
+### Patch Changes
+
+- Update addresses
+
+## 1.0.11
+
+### Patch Changes
+
+- Update monadTestnet contract addresses due to monadTestnet reset
+
 ## 1.0.10
 
 ### Patch Changes
